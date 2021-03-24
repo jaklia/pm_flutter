@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 
-enum TabItem { home, projects, users, settings }
+enum TabItem { home, projects, calendar, users, settings }
 
 Map<TabItem, String> tabName = {
   TabItem.home: 'Home',
   TabItem.projects: 'Projects',
+  TabItem.calendar: 'Calendar',
   TabItem.users: 'Users',
-  TabItem.settings: 'Settings'
+  TabItem.settings: 'Settings',
 };
 
 Map<TabItem, IconData> tabIcon = {
   TabItem.home: Icons.home,
   TabItem.projects: Icons.list,
+  TabItem.calendar: Icons.calendar_today,
   TabItem.users: Icons.people,
   TabItem.settings: Icons.settings
 };
@@ -19,6 +21,7 @@ Map<TabItem, IconData> tabIcon = {
 Map<TabItem, MaterialColor> activeTabColor = {
   TabItem.home: Colors.blue, //Colors.red,
   TabItem.projects: Colors.blue, //Colors.green,
+  TabItem.calendar: Colors.blue,
   TabItem.users: Colors.blue,
   TabItem.settings: Colors.blue, //Colors.amber,
 };
@@ -35,6 +38,7 @@ class BottomNavigation extends StatelessWidget {
       items: [
         _buildItem(context, tabItem: TabItem.home),
         _buildItem(context, tabItem: TabItem.projects),
+        _buildItem(context, tabItem: TabItem.calendar),
         _buildItem(context, tabItem: TabItem.users),
         _buildItem(context, tabItem: TabItem.settings)
       ],
@@ -52,6 +56,8 @@ class BottomNavigation extends StatelessWidget {
         icon,
         color: _colorTabMatching(context, item: tabItem),
       ),
+      // label: text,
+
       title: Text(
         text,
         style: TextStyle(

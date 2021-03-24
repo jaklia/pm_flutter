@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pm_flutter/navigator/bottom_navigation.dart';
+import 'package:pm_flutter/screens/calendar/calendar.dart';
 import 'package:pm_flutter/screens/home/home.dart';
 import 'package:pm_flutter/screens/projects/project_list.dart';
 import 'package:pm_flutter/screens/settings.dart';
@@ -17,6 +18,7 @@ class TabScreenState extends State<TabScreen> {
     // not sure what this debugLabel does, or how to access it
     TabItem.home: GlobalKey<NavigatorState>(debugLabel: 'HOME TAB'),
     TabItem.projects: GlobalKey<NavigatorState>(debugLabel: 'PROJECTS TAB'),
+    TabItem.calendar: GlobalKey<NavigatorState>(debugLabel: 'CALENDAR TAB'),
     TabItem.users: GlobalKey<NavigatorState>(debugLabel: 'USERS TAB'),
     TabItem.settings: GlobalKey<NavigatorState>(debugLabel: 'SETTINGS TAB'),
   };
@@ -34,8 +36,7 @@ class TabScreenState extends State<TabScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        final isFirstRouteInCurrentTab =
-            !await _navigatorKeys[_currentTab].currentState.maybePop();
+        final isFirstRouteInCurrentTab = !await _navigatorKeys[_currentTab].currentState.maybePop();
         if (isFirstRouteInCurrentTab) {
           // if not on the 'main' tab
           if (_currentTab != TabItem.home) {
@@ -52,6 +53,7 @@ class TabScreenState extends State<TabScreen> {
         body: Stack(children: <Widget>[
           _buildOffstageNavigator(TabItem.home),
           _buildOffstageNavigator(TabItem.projects),
+          _buildOffstageNavigator(TabItem.calendar),
           _buildOffstageNavigator(TabItem.users),
           _buildOffstageNavigator(TabItem.settings),
         ]),
@@ -85,6 +87,8 @@ class TabScreenState extends State<TabScreen> {
                 return HomeScreen();
               case TabItem.projects:
                 return ProjectListScreen();
+              case TabItem.calendar:
+                return CalendarScreen();
               case TabItem.users:
                 return UserListScreen();
               case TabItem.settings:
