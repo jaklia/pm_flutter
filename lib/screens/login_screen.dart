@@ -60,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: 16),
             Container(
               width: double.infinity,
-              child: RaisedButton(
+              child: ElevatedButton(
                 child: Text("Login"),
                 onPressed: onLogin,
               ),
@@ -83,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
             title: Text("Error"),
             content: Text("Please enter your name and password to login"),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 child: Text("OK"),
                 onPressed: () {
                   Navigator.of(context).pop();

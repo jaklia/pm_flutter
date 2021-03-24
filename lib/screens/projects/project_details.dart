@@ -42,7 +42,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
               children: <Widget>[
                 Text(
                   widget.project.name,
-                  style: Theme.of(context).textTheme.title,
+                  style: Theme.of(context).textTheme.headline6,
                   textAlign: TextAlign.left,
                 ),
                 SizedBox(height: 20),
@@ -57,8 +57,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
                   return Container(
-                    child: Text(
-                        "Something went wrong!\n${snapshot.error.toString()}"),
+                    child: Text("Something went wrong!\n${snapshot.error.toString()}"),
                   );
                 } else if (snapshot.hasData) {
                   return ListView.separated(
@@ -78,8 +77,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
                       ),
                     ),
                     separatorBuilder: (context, i) => Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Divider()),
+                        padding: const EdgeInsets.symmetric(horizontal: 16), child: Divider()),
                   );
                 } else {
                   return Container();
@@ -93,7 +91,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
   }
 
   void _openIssueDetails(BuildContext context, Issue issue) {
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => IssueDetailsScreen(issue, widget.project)));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => IssueDetailsScreen(issue, widget.project)));
   }
 }

@@ -56,8 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
                   return Container(
-                    child: Text(
-                        "Something went wrong!\n${snapshot.error.toString()}"),
+                    child: Text("Something went wrong!\n${snapshot.error.toString()}"),
                   );
                 } else if (snapshot.hasData) {
                   return ListView.separated(
@@ -78,8 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     separatorBuilder: (context, i) => Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Divider()),
+                        padding: const EdgeInsets.symmetric(horizontal: 16), child: Divider()),
                   );
                 } else {
                   return Container();
@@ -141,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        FlatButton(
+        TextButton(
           child: Text("OK"),
           onPressed: _filterDate,
         )
@@ -194,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
           title: Text(title),
           content: Text(text),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text("OK"),
               onPressed: () {
                 Navigator.of(context).pop();

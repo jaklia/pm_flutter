@@ -20,24 +20,21 @@ class IssueDetailsScreen extends StatelessWidget {
           children: <Widget>[
             Text(
               _project.name,
-              style: Theme.of(context)
-                  .textTheme
-                  .body1
-                  .copyWith(color: Colors.grey),
+              style: Theme.of(context).textTheme.bodyText2.copyWith(color: Colors.grey),
             ),
             //Text(_issue.projectId.toString()),
             SizedBox(height: 10),
             Text(
               _issue.name,
-              style: Theme.of(context).textTheme.title,
+              style: Theme.of(context).textTheme.headline6,
             ),
             SizedBox(height: 20),
-            Text(_issue.description, style: Theme.of(context).textTheme.body1),
+            Text(_issue.description, style: Theme.of(context).textTheme.bodyText2),
             SizedBox(height: 20),
             // TODO:  maybe: show logs for this issue
             Container(
               width: double.infinity,
-              child: RaisedButton(
+              child: ElevatedButton(
                 child: Text("Log Worktime"),
                 onPressed: () => _openLogPage(context, _issue),
               ),
@@ -49,7 +46,7 @@ class IssueDetailsScreen extends StatelessWidget {
   }
 
   void _openLogPage(BuildContext context, Issue issue) {
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => LogWorkTimeScreen(issue: issue)));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => LogWorkTimeScreen(issue: issue)));
   }
 }

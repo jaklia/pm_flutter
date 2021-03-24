@@ -59,7 +59,7 @@ class _LogWorkTimeScreenState extends State<LogWorkTimeScreen> {
             SizedBox(height: 20),
             Container(
               width: double.infinity,
-              child: RaisedButton(
+              child: ElevatedButton(
                 child: Text("Save"),
                 onPressed: () => _save(context),
               ),
@@ -80,10 +80,8 @@ class _LogWorkTimeScreenState extends State<LogWorkTimeScreen> {
         // ),
         SizedBox(height: 10),
         Text(
-          widget.worktime == null
-              ? widget.issue.name
-              : widget.worktime.issueName,
-          style: Theme.of(context).textTheme.title,
+          widget.worktime == null ? widget.issue.name : widget.worktime.issueName,
+          style: Theme.of(context).textTheme.headline6,
         ),
         SizedBox(height: 20),
         // Text(widget.issue.description,
@@ -102,14 +100,11 @@ class _LogWorkTimeScreenState extends State<LogWorkTimeScreen> {
           children: <Widget>[
             Text(
               'Date',
-              style: Theme.of(context)
-                  .textTheme
-                  .body1
-                  .copyWith(color: Colors.grey),
+              style: Theme.of(context).textTheme.bodyText2.copyWith(color: Colors.grey),
             ),
             Text(
               DateFormat.MMMMEEEEd().format(_date),
-              style: Theme.of(context).textTheme.body1,
+              style: Theme.of(context).textTheme.bodyText2,
             ),
           ],
         ),
@@ -123,7 +118,7 @@ class _LogWorkTimeScreenState extends State<LogWorkTimeScreen> {
       children: <Widget>[
         Text(
           'Worktime',
-          style: Theme.of(context).textTheme.body1.copyWith(color: Colors.grey),
+          style: Theme.of(context).textTheme.bodyText2.copyWith(color: Colors.grey),
         ),
         SizedBox(width: 120),
         Container(

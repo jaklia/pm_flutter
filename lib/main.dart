@@ -21,8 +21,7 @@ class MyApp extends StatelessWidget {
           dispose: (_, usersBloc) => usersBloc.dispose(),
         ),
         Provider<ProjectsBloc>(
-            create: (_) => ProjectsBloc(),
-            dispose: (_, projectsBloc) => projectsBloc.dispose()),
+            create: (_) => ProjectsBloc(), dispose: (_, projectsBloc) => projectsBloc.dispose()),
         Provider<WorktimesBloc>(
           create: (_) => WorktimesBloc(),
           dispose: (_, worktimesBloc) => worktimesBloc.dispose(),
@@ -39,10 +38,10 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.light,
           primarySwatch: Colors.blueGrey,
         ),
-        darkTheme: ThemeData(
-          brightness: Brightness.dark,
-          accentColor: Colors.blue,
-        ),
+        // darkTheme: ThemeData(
+        //   brightness: Brightness.dark,
+        //   accentColor: Colors.blue,
+        // ),
         home: LoginScreen(),
         // navigatorKey: GlobalKey<NavigatorState>(debugLabel: 'MAIN'),
         // DON'T DO THIS, hot reload wont work (app always returns to login screen on hot reload)
