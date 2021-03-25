@@ -9,10 +9,10 @@ part of 'user.dart';
 User _$UserFromJson(Map<String, dynamic> json) {
   return User(
     name: json['name'] as String,
-  )
-    ..userId = json['userId'] as String
-    ..email = json['email'] as String
-    ..role = _$enumDecodeNullable(_$RoleEnumMap, json['role']);
+    role: _$enumDecodeNullable(_$RoleEnumMap, json['role']),
+    email: json['email'] as String,
+    userId: json['userId'] as int,
+  );
 }
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{

@@ -11,7 +11,7 @@ enum Role {
 
 @JsonSerializable()
 class User {
-  String userId;
+  int userId;
   String name;
   String email;
   Role role;
@@ -28,7 +28,6 @@ class UserList {
 
   UserList(this.users);
 
-  factory UserList.fromJson(Map<String, dynamic> json) =>
-      _$UserListFromJson(json);
+  factory UserList.fromJson(Map<String, dynamic> json) => _$UserListFromJson(json);
   Map<String, dynamic> toJson() => _$UserListToJson(this);
 }

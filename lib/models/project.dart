@@ -15,8 +15,7 @@ class Project {
     @required this.description,
   });
 
-  factory Project.fromJson(Map<String, dynamic> json) =>
-      _$ProjectFromJson(json);
+  factory Project.fromJson(Map<String, dynamic> json) => _$ProjectFromJson(json);
   Map<String, dynamic> toJson() => _$ProjectToJson(this);
 }
 
@@ -26,7 +25,6 @@ class ProjectList {
 
   ProjectList(this.pojects);
 
-  factory ProjectList.fromJson(Map<String, dynamic> json) =>
-      _$ProjectListFromJson(json);
+  factory ProjectList.fromJson(Map<String, dynamic> json) => _$ProjectListFromJson(json);
   Map<String, dynamic> toJson() => _$ProjectListToJson(this);
 }

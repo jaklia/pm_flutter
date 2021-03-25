@@ -38,7 +38,7 @@ class UsersProvider {
     // return list;
   }
 
-  Future<List<WorkTime>> getUserWorktimes(String userId) async {
+  Future<List<WorkTime>> getUserWorktimes(int userId) async {
     return [];
     // var res = await Network.dio.get("${Urls.ADMIN}/$userId");
     // print(res.data.toString());

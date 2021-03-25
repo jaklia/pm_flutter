@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:pm_flutter/utility/urls.dart';
 
@@ -9,6 +12,15 @@ class Network {
   Network._privateConstructor() {
     if (_dio == null) {
       _dio = Dio(BaseOptions(baseUrl: Urls.BASEURL));
+      // this below is needed to fix bad certificate when accessing localhost
+      //   it's probably only because of debug
+      //     when app is published to azure, probably won't need it anymore
+      //   or maybe because https is enabled, then no idea how to get a certificate
+      (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+          (HttpClient client) {
+        client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+        return client;
+      };
     }
   }
 

@@ -27,7 +27,6 @@ class IssueList {
 
   IssueList(this.issues);
 
-  factory IssueList.fromJson(Map<String, dynamic> json) =>
-      _$IssueListFromJson(json);
+  factory IssueList.fromJson(Map<String, dynamic> json) => _$IssueListFromJson(json);
   Map<String, dynamic> toJson() => _$IssueListToJson(this);
 }

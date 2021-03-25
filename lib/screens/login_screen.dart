@@ -10,8 +10,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _nameController = TextEditingController(text: "test@test.hu");
-  final _passwordController = TextEditingController(text: "asdasd");
+  final _nameController = TextEditingController(text: "Teszt Elek");
+  final _passwordController = TextEditingController(text: "Asdf123.");
   final _focusNode = FocusNode();
   ProfileBloc _profileBloc;
 

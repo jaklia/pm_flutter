@@ -9,6 +9,5 @@ class UsersRepository {
 
   Future<List<WorkTime>> getAllWorktimes() => _provider.getAllWorktimes();
 
-  Future<List<WorkTime>> getUserWorktimes(String userId) =>
-      _provider.getUserWorktimes(userId);
+  Future<List<WorkTime>> getUserWorktimes(int userId) => _provider.getUserWorktimes(userId);
 }

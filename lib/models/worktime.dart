@@ -21,8 +21,7 @@ class WorkTime {
     @required this.issueName,
   });
 
-  factory WorkTime.fromJson(Map<String, dynamic> json) =>
-      _$WorkTimeFromJson(json);
+  factory WorkTime.fromJson(Map<String, dynamic> json) => _$WorkTimeFromJson(json);
   Map<String, dynamic> toJson() => _$WorkTimeToJson(this);
 }
 
@@ -32,7 +31,6 @@ class WorkTimeList {
 
   WorkTimeList(this.worktimes);
 
-  factory WorkTimeList.fromJson(Map<String, dynamic> json) =>
-      _$WorkTimeListFromJson(json);
+  factory WorkTimeList.fromJson(Map<String, dynamic> json) => _$WorkTimeListFromJson(json);
   Map<String, dynamic> toJson() => _$WorkTimeListToJson(this);
 }
