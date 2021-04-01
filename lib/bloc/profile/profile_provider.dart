@@ -5,7 +5,7 @@ import 'package:pm_flutter/utility/network.dart';
 import 'package:pm_flutter/utility/urls.dart';
 
 class ProfileProvider {
-  Future<User> login(String userName, String password) async {
+  Future<String> login(String userName, String password) async {
     // return Future.delayed(
     //   Duration(milliseconds: 500),
     //   () => User(
@@ -15,16 +15,25 @@ class ProfileProvider {
     var res =
         await Network.dio.post(Urls.LOGIN, data: {"username": userName, "password": password});
 
-    // var asd = jsonDecode(res.data);
     var token = res.data["accessToken"];
-    var user = User.fromJson(res.data["user"]);
+    //var user = User.fromJson(res.data["user"]);
 
     print(res.toString());
 
-    return user;
+    //return user;
+    return token;
   }
 
   logout() {
     //TODO: logout
+  }
+
+  Future<User> getProfile(int userId) async {
+    var res = await Network.dio.get('${Urls.USERS}/$userId');
+    var user = User.fromJson(res.data);
+
+    print(res.toString());
+
+    return user;
   }
 }

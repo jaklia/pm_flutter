@@ -2,13 +2,25 @@ import 'package:pm_flutter/models/issue.dart';
 
 Map<int, List<Issue>> mockIssues = {
   1: [
-    Issue(id: 11, name: "Issue 11", description: "nope", projectId: 1),
-    Issue(id: 12, name: "Issue 12", description: "nope", projectId: 1),
-    Issue(id: 13, name: "Issue 13", description: "nope", projectId: 1),
-    Issue(id: 14, name: "Issue 14", description: "nope", projectId: 1),
+    Issue(
+        id: 11,
+        name: "Issue 11",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+        projectId: 1),
+    Issue(id: 12, name: "Issue 12", description: "Lorem ipsum ", projectId: 1),
+    Issue(id: 13, name: "Issue 13", description: "Lorem ipsum dolor sit amet", projectId: 1),
+    Issue(
+        id: 14,
+        name: "Issue 14",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+        projectId: 1),
   ],
   2: [
-    Issue(id: 21, name: "Issue 21", description: "nope", projectId: 2),
+    Issue(
+        id: 21,
+        name: "Issue 21",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+        projectId: 2),
     Issue(
         id: 22,
         name: "Issue 22",
@@ -17,27 +29,47 @@ Map<int, List<Issue>> mockIssues = {
         projectId: 2),
   ],
   3: [
-    Issue(id: 31, name: "Issue 31", description: "nope", projectId: 3),
+    Issue(
+        id: 31,
+        name: "Issue 31",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+        projectId: 3),
     Issue(
         id: 32,
         name: "Issue 32",
         description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
         projectId: 3),
-    Issue(id: 33, name: "Issue 33", description: "nope", projectId: 3),
-    Issue(id: 34, name: "Issue 34", description: "nope", projectId: 3),
-    Issue(id: 35, name: "Issue 35", description: "nope", projectId: 3),
-    Issue(id: 36, name: "Issue 36", description: "nope", projectId: 3),
-    Issue(id: 37, name: "Issue 37", description: "nope", projectId: 3),
-    Issue(id: 38, name: "Issue 38", description: "nope", projectId: 3),
-    Issue(id: 39, name: "Issue 39", description: "nope", projectId: 3),
+    Issue(
+        id: 33,
+        name: "Issue 33",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+        projectId: 3),
+    Issue(
+        id: 34,
+        name: "Issue 34",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+        projectId: 3),
+    Issue(id: 35, name: "Issue 35", description: "Lorem ipsum dolor sit amet", projectId: 3),
+    Issue(id: 36, name: "Issue 36", description: "Lorem ipsum dolor sit amet", projectId: 3),
+    Issue(id: 37, name: "Issue 37", description: "Lorem ipsum dolor sit amet", projectId: 3),
+    Issue(id: 38, name: "Issue 38", description: "Lorem ipsum dolor sit amet", projectId: 3),
+    Issue(id: 39, name: "Issue 39", description: "Lorem ipsum dolor sit amet", projectId: 3),
   ],
   4: [
-    Issue(id: 41, name: "Issue 41", description: "nope", projectId: 4),
-    Issue(id: 42, name: "Issue 42", description: "nope", projectId: 4),
-    Issue(id: 43, name: "Issue 43", description: "nope", projectId: 4),
-    Issue(id: 44, name: "Issue 44", description: "nope", projectId: 4),
-    Issue(id: 45, name: "Issue 45", description: "nope", projectId: 4),
+    Issue(
+        id: 41,
+        name: "Issue 41",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+        projectId: 4),
+    Issue(id: 42, name: "Issue 42", description: "Lorem ipsum dolor sit amet", projectId: 4),
+    Issue(id: 43, name: "Issue 43", description: "Lorem ipsum dolor sit amet", projectId: 4),
+    Issue(id: 44, name: "Issue 44", description: "Lorem ipsum dolor sit amet", projectId: 4),
+    Issue(
+        id: 45,
+        name: "Issue 45",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+        projectId: 4),
   ],
   5: [
     Issue(

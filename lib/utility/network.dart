@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
+import 'package:pm_flutter/local_store/shared_prefs_manager.dart';
 import 'package:pm_flutter/utility/urls.dart';
 
 class Network {
@@ -12,6 +13,7 @@ class Network {
   Network._privateConstructor() {
     if (_dio == null) {
       _dio = Dio(BaseOptions(baseUrl: Urls.BASEURL));
+      _dio.interceptors.add(_interceptors);
       // this below is needed to fix bad certificate when accessing localhost
       //   it's probably only because of debug
       //     when app is published to azure, probably won't need it anymore
@@ -30,41 +32,35 @@ class Network {
     return _instance._dio;
   }
 
-  static void deleteCookies() {}
+  var _interceptors = InterceptorsWrapper(onRequest: (RequestOptions options) async {
+    // Do something before request is sent
+    if (options.path != Urls.LOGIN) {
+      // add token to header if not login
+      var token = await SharedPrefsManager.getToken();
+      var t = "Bearer $token";
+      options.headers["Authorization"] = t;
+      var asd = "asdasdasd";
+    }
+    return options;
+  }, onResponse: (Response response) {
+    // Do something with response data
+    return response; // continue
+  }, onError: (DioError error) async {
+    // Do something with response error
+    // if (error.response?.statusCode == 403) {
+    //   _dio.interceptors.requestLock.lock();
+    //   _dio.interceptors.responseLock.lock();
+    //   RequestOptions options = error.response.request;
+    //   FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    //   token = await user.getIdToken(refresh: true);
+    //   await writeAuthKey(token);
+    //   options.headers["Authorization"] = "Bearer " + token;
 
-  // static String get cookies {
-  //   return _instance._cookieJar
-  //           .loadForRequest(Uri.parse(Urls.BASEURL + Urls.PROJECT))
-  //           .toString() +
-  //       "\n----------------\n" +
-  //       _instance._cookieJar
-  //           .loadForRequest(Uri.parse(Urls.BASEURL + Urls.LOGIN))
-  //           .toString();
-  // }
-
-  // Future<Map<String, dynamic>> get(String url) async {
-  //   var res = await dio.get(url);
-  //   var data = res.data;
-  //   var cookie = res.headers['set-cookie'];
-  //   var x = jsonDecode(data);
-  //   var asd = Map<String, dynamic>();
-  //   asd = {'name': 'name', 'a': 1};
-  //   return asd;
-  // }
-
-  // Future<Map<String, dynamic>> post(
-  //     String url, Map<String, dynamic> body) async {
-  //   var res = await dio.post(url, data: body);
-  //   var asd = Map<String, dynamic>();
-  //   asd = {'name': 'name', 'a': 1};
-  //   return asd;
-  // }
-
-  // Map<String, dynamic> put(String url, Map<String, dynamic> body) {
-  //   //
-  // }
-
-  // Map<String, dynamic> delete(String url, Map<String, dynamic> body) {
-  //   //
-  // }
+    //   _dio.interceptors.requestLock.unlock();
+    //   _dio.interceptors.responseLock.unlock();
+    //   return _dio.request(options.path, options: options);
+    // } else {
+    return error;
+    // }
+  });
 }

@@ -10,25 +10,25 @@ import 'package:pm_flutter/utility/urls.dart';
 class ProjectsProvider {
   //var dio = Network.dio;
   Future<List<Project>> getProjectsList() async {
-    return Future.delayed(Duration(seconds: 1), () => mockProjects);
+    // return Future.delayed(Duration(seconds: 1), () => mockProjects);
 
-    // var res = await Network.dio.get(Urls.PROJECT);
-    // print(res.data.toString());
-    // //var tmp = jsonDecode(res.data);
-    // List<Project> list = res.data.map<Project>(
-    //   (item) {
-    //     Map<String, dynamic> asd = item;
-    //     print(asd);
-    //     var x = Project.fromJson(asd);
-    //     // return Project(
-    //     //   id: asd["id"],
-    //     //   name: asd["name"],
-    //     //   description: asd["description"],
-    //     // );
-    //     return x;
-    //   },
-    // ).toList();
-    // return list;
+    var res = await Network.dio.get(Urls.PROJECT);
+    print(res.data.toString());
+    //var tmp = jsonDecode(res.data);
+    List<Project> list = res.data.map<Project>(
+      (item) {
+        Map<String, dynamic> asd = item;
+        print(asd);
+        var x = Project.fromJson(asd);
+        // return Project(
+        //   id: asd["id"],
+        //   name: asd["name"],
+        //   description: asd["description"],
+        // );
+        return x;
+      },
+    ).toList();
+    return list;
   }
 
   Future<List<Issue>> getIssuesForProject(int projectId) async {

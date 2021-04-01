@@ -8,16 +8,16 @@ part of 'user.dart';
 
 User _$UserFromJson(Map<String, dynamic> json) {
   return User(
-    name: json['name'] as String,
+    name: json['userName'] as String,
     role: _$enumDecodeNullable(_$RoleEnumMap, json['role']),
     email: json['email'] as String,
-    userId: json['userId'] as int,
+    userId: json['id'] as int,
   );
 }
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
-      'userId': instance.userId,
-      'name': instance.name,
+      'id': instance.userId,
+      'username': instance.name,
       'email': instance.email,
       'role': _$RoleEnumMap[instance.role],
     };
@@ -32,9 +32,7 @@ T _$enumDecode<T>(
         '${enumValues.values.join(', ')}');
   }
 
-  final value = enumValues.entries
-      .singleWhere((e) => e.value == source, orElse: () => null)
-      ?.key;
+  final value = enumValues.entries.singleWhere((e) => e.value == source, orElse: () => null)?.key;
 
   if (value == null && unknownValue == null) {
     throw ArgumentError('`$source` is not one of the supported values: '
@@ -62,8 +60,7 @@ const _$RoleEnumMap = {
 UserList _$UserListFromJson(Map<String, dynamic> json) {
   return UserList(
     (json['users'] as List)
-        ?.map(
-            (e) => e == null ? null : User.fromJson(e as Map<String, dynamic>))
+        ?.map((e) => e == null ? null : User.fromJson(e as Map<String, dynamic>))
         ?.toList(),
   );
 }

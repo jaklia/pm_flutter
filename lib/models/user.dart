@@ -11,7 +11,9 @@ enum Role {
 
 @JsonSerializable()
 class User {
+  @JsonKey(name: "id")
   int userId;
+  @JsonKey(name: "userName")
   String name;
   String email;
   Role role;
