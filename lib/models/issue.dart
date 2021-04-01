@@ -6,15 +6,21 @@ part 'issue.g.dart';
 @JsonSerializable()
 class Issue {
   int id;
-  String name;
+  String subject;
   String description;
+  DateTime startDate;
+  DateTime dueDate;
+  int estimatedHours;
   int projectId;
 
   Issue({
     @required this.id,
-    @required this.name,
+    @required this.subject,
     @required this.description,
     @required this.projectId,
+    this.estimatedHours,
+    this.startDate,
+    this.dueDate,
   });
 
   factory Issue.fromJson(Map<String, dynamic> json) => _$IssueFromJson(json);

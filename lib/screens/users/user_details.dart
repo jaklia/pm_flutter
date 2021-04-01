@@ -3,10 +3,10 @@ import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 import 'package:pm_flutter/bloc/profile/profile_bloc.dart';
 import 'package:pm_flutter/bloc/users/users_bloc.dart';
-import 'package:pm_flutter/bloc/worktimes/worktimes_bloc.dart';
+import 'package:pm_flutter/bloc/timeentries/timeentries_bloc.dart';
 import 'package:pm_flutter/models/message.dart';
 import 'package:pm_flutter/models/user.dart';
-import 'package:pm_flutter/models/worktime.dart';
+import 'package:pm_flutter/models/timeentry.dart';
 import 'package:pm_flutter/screens/projects/log_worktime.dart';
 import 'package:provider/provider.dart';
 
@@ -21,38 +21,23 @@ class UserDetailsScreen extends StatefulWidget {
 
 class _UserDetailsScreenState extends State<UserDetailsScreen> {
   UsersBloc _usersBloc;
-  WorktimesBloc _worktimesBloc;
+  TimeEntriesBloc _worktimesBloc;
   ProfileBloc _profileBloc;
 
   TextEditingController msgController = TextEditingController(text: "");
   List<Message> messages = [
     Message(text: "1 Lorem ipsum dolor sit amet", senderId: "10"),
-    Message(
-        text: "2 Sed ut perspiciatis unde omnis iste natus error sit",
-        senderId: "10"),
-    Message(
-        text: "3 At vero eos et accusamus et iusto odio dignissimos",
-        senderId: "10"),
-    Message(
-        text: "4 Temporibus autem quibusdam et aut officiis", senderId: "10"),
+    Message(text: "2 Sed ut perspiciatis unde omnis iste natus error sit", senderId: "10"),
+    Message(text: "3 At vero eos et accusamus et iusto odio dignissimos", senderId: "10"),
+    Message(text: "4 Temporibus autem quibusdam et aut officiis", senderId: "10"),
     Message(text: "5 Lorem ipsum dolor sit amet", senderId: "10"),
-    Message(
-        text: "6 Sed ut perspiciatis unde omnis iste natus error sit",
-        senderId: "10"),
-    Message(
-        text: "7 At vero eos et accusamus et iusto odio dignissimos",
-        senderId: "10"),
-    Message(
-        text: "8 Temporibus autem quibusdam et aut officiis", senderId: "10"),
+    Message(text: "6 Sed ut perspiciatis unde omnis iste natus error sit", senderId: "10"),
+    Message(text: "7 At vero eos et accusamus et iusto odio dignissimos", senderId: "10"),
+    Message(text: "8 Temporibus autem quibusdam et aut officiis", senderId: "10"),
     Message(text: "9 Lorem ipsum dolor sit amet", senderId: "10"),
-    Message(
-        text: "10 Sed ut perspiciatis unde omnis iste natus error sit",
-        senderId: "10"),
-    Message(
-        text: "11 At vero eos et accusamus et iusto odio dignissimos",
-        senderId: "10"),
-    Message(
-        text: "12 Temporibus autem quibusdam et aut officiis", senderId: "10"),
+    Message(text: "10 Sed ut perspiciatis unde omnis iste natus error sit", senderId: "10"),
+    Message(text: "11 At vero eos et accusamus et iusto odio dignissimos", senderId: "10"),
+    Message(text: "12 Temporibus autem quibusdam et aut officiis", senderId: "10"),
   ];
 
   @override
@@ -70,7 +55,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
     }
     _usersBloc.getUserWorktimes(widget._user);
     if (_worktimesBloc == null) {
-      _worktimesBloc = Provider.of<WorktimesBloc>(context);
+      _worktimesBloc = Provider.of<TimeEntriesBloc>(context);
     } else {
       print("worktimesBloc not null");
     }
@@ -115,8 +100,8 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                     ),
                     child: Container(
                       width: 250,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      decoration:
+                          BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
                       padding: const EdgeInsets.all(10),
                       child: Text(messages[i].text),
                     ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pm_flutter/bloc/profile/profile_bloc.dart';
 import 'package:pm_flutter/bloc/projects/projects_bloc.dart';
 import 'package:pm_flutter/bloc/users/users_bloc.dart';
-import 'package:pm_flutter/bloc/worktimes/worktimes_bloc.dart';
+import 'package:pm_flutter/bloc/timeentries/timeentries_bloc.dart';
 import 'package:pm_flutter/screens/login_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -22,8 +22,8 @@ class MyApp extends StatelessWidget {
         ),
         Provider<ProjectsBloc>(
             create: (_) => ProjectsBloc(), dispose: (_, projectsBloc) => projectsBloc.dispose()),
-        Provider<WorktimesBloc>(
-          create: (_) => WorktimesBloc(),
+        Provider<TimeEntriesBloc>(
+          create: (_) => TimeEntriesBloc(),
           dispose: (_, worktimesBloc) => worktimesBloc.dispose(),
         ),
         Provider<ProfileBloc>(

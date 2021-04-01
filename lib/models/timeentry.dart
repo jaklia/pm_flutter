@@ -1,33 +1,37 @@
 import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'worktime.g.dart';
+part 'timeentry.g.dart';
 
 @JsonSerializable()
-class WorkTime {
+class TimeEntry {
   int id;
-  DateTime date; //    [2019-11-25 00:00:00.000]    space előtti rész
-  int duration;
+  DateTime date;
+  int minutes;
+  String description;
   int issueId; // issueId
-  String userId; // userId
+  int userId; // userId
   String issueName;
+  String userName;
 
-  WorkTime({
+  TimeEntry({
     @required this.id,
     @required this.date,
-    @required this.duration,
+    @required this.minutes,
+    @required this.description,
     @required this.issueId,
     @required this.userId,
     @required this.issueName,
+    @required this.userName,
   });
 
-  factory WorkTime.fromJson(Map<String, dynamic> json) => _$WorkTimeFromJson(json);
-  Map<String, dynamic> toJson() => _$WorkTimeToJson(this);
+  factory TimeEntry.fromJson(Map<String, dynamic> json) => _$TimeEntryFromJson(json);
+  Map<String, dynamic> toJson() => _$TimeEntryToJson(this);
 }
 
 @JsonSerializable()
 class WorkTimeList {
-  List<WorkTime> worktimes;
+  List<TimeEntry> worktimes;
 
   WorkTimeList(this.worktimes);
 

@@ -24,9 +24,9 @@ class _UserListScreenState extends State<UserListScreen> {
     if (_usersBloc == null) {
       _usersBloc = Provider.of<UsersBloc>(context);
     }
-    if (_profileBloc.isAdmin) {
-      _usersBloc.getUsersList(_profileBloc.isAdmin);
-    }
+    //if (_profileBloc.isAdmin) {
+    _usersBloc.getUsersList(_profileBloc.isAdmin);
+    //}
   }
 
   @override
@@ -60,8 +60,7 @@ class _UserListScreenState extends State<UserListScreen> {
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Container(
-              child:
-                  Text("Something went wrong!\n${snapshot.error.toString()}"),
+              child: Text("Something went wrong!\n${snapshot.error.toString()}"),
             );
           } else if (snapshot.hasData) {
             return ListView.separated(
@@ -75,9 +74,8 @@ class _UserListScreenState extends State<UserListScreen> {
                       : snapshot.data[i].name,
                 ),
               ),
-              separatorBuilder: (context, i) => Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Divider()),
+              separatorBuilder: (context, i) =>
+                  Padding(padding: const EdgeInsets.symmetric(horizontal: 16), child: Divider()),
             );
           } else {
             return Container();
@@ -88,8 +86,7 @@ class _UserListScreenState extends State<UserListScreen> {
   }
 
   void _openUserDetails(BuildContext context, User user) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => UserDetailsScreen(user)));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => UserDetailsScreen(user)));
   }
 }
 

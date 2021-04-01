@@ -25,7 +25,7 @@ class IssueDetailsScreen extends StatelessWidget {
             //Text(_issue.projectId.toString()),
             SizedBox(height: 10),
             Text(
-              _issue.name,
+              _issue.subject,
               style: Theme.of(context).textTheme.headline6,
             ),
             SizedBox(height: 20),

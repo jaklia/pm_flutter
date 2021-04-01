@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pm_flutter/bloc/profile/profile_bloc.dart';
 import 'package:pm_flutter/bloc/users/users_bloc.dart';
-import 'package:pm_flutter/bloc/worktimes/worktimes_bloc.dart';
+import 'package:pm_flutter/bloc/timeentries/timeentries_bloc.dart';
 import 'package:pm_flutter/models/user.dart';
-import 'package:pm_flutter/models/worktime.dart';
+import 'package:pm_flutter/models/timeentry.dart';
 import 'package:pm_flutter/screens/projects/log_worktime.dart';
 import 'package:provider/provider.dart';
 
@@ -15,7 +15,7 @@ class AdminWorktimesScreen extends StatefulWidget {
 
 class _AdminWorktimesScreenState extends State<AdminWorktimesScreen> {
   UsersBloc _userBloc;
-  WorktimesBloc _worktimesBloc;
+  TimeEntriesBloc _worktimesBloc;
 
   @override
   void didChangeDependencies() {
@@ -25,7 +25,7 @@ class _AdminWorktimesScreenState extends State<AdminWorktimesScreen> {
     }
     _userBloc.getAllWorktimes();
     if (_worktimesBloc == null) {
-      _worktimesBloc = Provider.of<WorktimesBloc>(context);
+      _worktimesBloc = Provider.of<TimeEntriesBloc>(context);
     }
   }
 
@@ -39,13 +39,12 @@ class _AdminWorktimesScreenState extends State<AdminWorktimesScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Expanded(
-            child: StreamBuilder<List<WorkTime>>(
+            child: StreamBuilder<List<TimeEntry>>(
               stream: _userBloc.allWorktimes,
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
                   return Container(
-                    child: Text(
-                        "Something went wrong!\n${snapshot.error.toString()}"),
+                    child: Text("Something went wrong!\n${snapshot.error.toString()}"),
                   );
                 } else if (snapshot.hasData) {
                   return ListView.separated(
@@ -57,7 +56,7 @@ class _AdminWorktimesScreenState extends State<AdminWorktimesScreen> {
                         "${DateFormat("y.MM.d").format(snapshot.data[i].date)}  ${snapshot.data[i].issueName}",
                       ),
                       subtitle: Text(
-                        "${snapshot.data[i].duration} minutes",
+                        "${snapshot.data[i].minutes} minutes",
                       ),
                       trailing: IconButton(
                         icon: Icon(Icons.delete_outline),
@@ -66,8 +65,7 @@ class _AdminWorktimesScreenState extends State<AdminWorktimesScreen> {
                       ),
                     ),
                     separatorBuilder: (context, i) => Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Divider()),
+                        padding: const EdgeInsets.symmetric(horizontal: 16), child: Divider()),
                   );
                 } else {
                   return Container();
@@ -80,12 +78,12 @@ class _AdminWorktimesScreenState extends State<AdminWorktimesScreen> {
     );
   }
 
-  void _deleteWorktime(WorkTime wt) {
+  void _deleteWorktime(TimeEntry wt) {
     _worktimesBloc.deleteWorktime(wt);
     _userBloc.getAllWorktimes();
   }
 
-  void _editWorktime(BuildContext context, WorkTime wt) {
+  void _editWorktime(BuildContext context, TimeEntry wt) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => LogWorkTimeScreen(

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pm_flutter/bloc/profile/profile_bloc.dart';
-import 'package:pm_flutter/bloc/worktimes/worktimes_bloc.dart';
+import 'package:pm_flutter/bloc/timeentries/timeentries_bloc.dart';
 import 'package:pm_flutter/models/user.dart';
-import 'package:pm_flutter/models/worktime.dart';
+import 'package:pm_flutter/models/timeentry.dart';
 import 'package:pm_flutter/screens/projects/log_worktime.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   DateTime _from, _to;
-  WorktimesBloc _worktimesBloc;
+  TimeEntriesBloc _worktimesBloc;
   ProfileBloc _profileBloc;
 
   @override
@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (_worktimesBloc == null) {
-      _worktimesBloc = Provider.of<WorktimesBloc>(context);
+      _worktimesBloc = Provider.of<TimeEntriesBloc>(context);
     }
     _worktimesBloc.getWorktimes(_from, _to);
     if (_profileBloc == null) {
@@ -51,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: <Widget>[
           _header(),
           Expanded(
-            child: StreamBuilder<List<WorkTime>>(
+            child: StreamBuilder<List<TimeEntry>>(
               stream: _worktimesBloc.worktimes,
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         "${DateFormat("y.MM.d").format(snapshot.data[i].date)}  ${snapshot.data[i].issueName}",
                       ),
                       subtitle: Text(
-                        "${snapshot.data[i].duration} hours",
+                        "${snapshot.data[i].minutes / 60.0} hours ${snapshot.data[i].description}",
                       ),
                       trailing: IconButton(
                         icon: Icon(Icons.delete_outline),
@@ -147,12 +147,12 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void _deleteWorktime(WorkTime wt) {
+  void _deleteWorktime(TimeEntry wt) {
     _worktimesBloc.deleteWorktime(wt);
     _worktimesBloc.getWorktimes(_from, _to);
   }
 
-  void _editWorktime(BuildContext context, WorkTime wt) {
+  void _editWorktime(BuildContext context, TimeEntry wt) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => LogWorkTimeScreen(

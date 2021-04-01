@@ -32,18 +32,20 @@ class ProjectsProvider {
   }
 
   Future<List<Issue>> getIssuesForProject(int projectId) async {
-    return Future.delayed(Duration(seconds: 1), () => mockIssues[projectId]);
-    // var res = await Network.dio
-    //     .get(Urls.ISSUE, queryParameters: {"projectId": projectId});
-    // print(res.data.toString());
-    // List<Issue> list = res.data.map<Issue>(
-    //   (item) {
-    //     Map<String, dynamic> asd = item;
-    //     print(asd);
-    //     var x = Issue.fromJson(asd);
-    //     return x;
-    //   },
-    // ).toList();
-    // return list;
+    // return Future.delayed(Duration(seconds: 1), () => mockIssues[projectId]);
+    var res = await Network.dio.get(
+      '${Urls.PROJECT}/$projectId/issues',
+    );
+    // var res = await Network.dio.get(Urls.ISSUE, queryParameters: {"projectId": projectId});
+    print(res.data.toString());
+    List<Issue> list = res.data.map<Issue>(
+      (item) {
+        Map<String, dynamic> asd = item;
+        print(asd);
+        var x = Issue.fromJson(asd);
+        return x;
+      },
+    ).toList();
+    return list;
   }
 }

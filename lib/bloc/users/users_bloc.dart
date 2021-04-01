@@ -1,13 +1,13 @@
 import 'package:pm_flutter/bloc/users/users_repository.dart';
 import 'package:pm_flutter/models/user.dart';
-import 'package:pm_flutter/models/worktime.dart';
+import 'package:pm_flutter/models/timeentry.dart';
 import 'package:rxdart/subjects.dart';
 
 class UsersBloc {
   final _repository = UsersRepository();
   final _users = BehaviorSubject<List<User>>.seeded([]);
-  final _worktimes = BehaviorSubject<List<WorkTime>>.seeded([]);
-  final _userWorktimes = BehaviorSubject<List<WorkTime>>.seeded([]);
+  final _worktimes = BehaviorSubject<List<TimeEntry>>.seeded([]);
+  final _userWorktimes = BehaviorSubject<List<TimeEntry>>.seeded([]);
   final _currentUser = BehaviorSubject<User>();
 
   void dispose() {

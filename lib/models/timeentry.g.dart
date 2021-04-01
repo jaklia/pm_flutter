@@ -1,41 +1,43 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'worktime.dart';
+part of 'timeentry.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-WorkTime _$WorkTimeFromJson(Map<String, dynamic> json) {
-  return WorkTime(
+TimeEntry _$TimeEntryFromJson(Map<String, dynamic> json) {
+  return TimeEntry(
     id: json['id'] as int,
     date: json['date'] == null ? null : DateTime.parse(json['date'] as String),
-    duration: json['duration'] as int,
+    minutes: json['minutes'] as int,
+    description: json['description'] as String,
     issueId: json['issueId'] as int,
-    userId: json['userId'] as String,
+    userId: json['userId'] as int,
     issueName: json['issueName'] as String,
+    userName: json['userName'] as String,
   );
 }
 
-Map<String, dynamic> _$WorkTimeToJson(WorkTime instance) => <String, dynamic>{
+Map<String, dynamic> _$TimeEntryToJson(TimeEntry instance) => <String, dynamic>{
       'id': instance.id,
       'date': instance.date?.toIso8601String(),
-      'duration': instance.duration,
+      'minutes': instance.minutes,
+      'description': instance.description,
       'issueId': instance.issueId,
       'userId': instance.userId,
       'issueName': instance.issueName,
+      'userName': instance.userName,
     };
 
 WorkTimeList _$WorkTimeListFromJson(Map<String, dynamic> json) {
   return WorkTimeList(
     (json['worktimes'] as List)
-        ?.map((e) =>
-            e == null ? null : WorkTime.fromJson(e as Map<String, dynamic>))
+        ?.map((e) => e == null ? null : TimeEntry.fromJson(e as Map<String, dynamic>))
         ?.toList(),
   );
 }
 
-Map<String, dynamic> _$WorkTimeListToJson(WorkTimeList instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$WorkTimeListToJson(WorkTimeList instance) => <String, dynamic>{
       'worktimes': instance.worktimes,
     };

@@ -1,10 +1,10 @@
-import 'package:pm_flutter/bloc/worktimes/worktimes_repository.dart';
-import 'package:pm_flutter/models/worktime.dart';
+import 'package:pm_flutter/bloc/timeentries/timeentries_repository.dart';
+import 'package:pm_flutter/models/timeentry.dart';
 import 'package:rxdart/subjects.dart';
 
-class WorktimesBloc {
-  final _repository = WorktimesRepository();
-  final _worktimes = BehaviorSubject<List<WorkTime>>.seeded([]);
+class TimeEntriesBloc {
+  final _repository = TimeEntriesRepository();
+  final _worktimes = BehaviorSubject<List<TimeEntry>>.seeded([]);
 
   get worktimes {
     return _worktimes.stream;
@@ -15,16 +15,16 @@ class WorktimesBloc {
     _worktimes.sink.add(res);
   }
 
-  Future<void> addWorktime(WorkTime wt) async {
+  Future<void> addWorktime(TimeEntry wt) async {
     var res = await _repository.addWorktime(wt);
     _worktimes.sink.add(_worktimes.value..add(res));
   }
 
-  Future<void> editWorktime(WorkTime wt) async {
+  Future<void> editWorktime(TimeEntry wt) async {
     _repository.editWorktime(wt);
   }
 
-  Future<void> deleteWorktime(WorkTime wt) async {
+  Future<void> deleteWorktime(TimeEntry wt) async {
     _repository.deleteWorktime(wt);
   }
 

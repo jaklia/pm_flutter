@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pm_flutter/bloc/profile/profile_bloc.dart';
-import 'package:pm_flutter/bloc/worktimes/worktimes_bloc.dart';
+import 'package:pm_flutter/bloc/timeentries/timeentries_bloc.dart';
 import 'package:pm_flutter/models/issue.dart';
-import 'package:pm_flutter/models/worktime.dart';
+import 'package:pm_flutter/models/timeentry.dart';
 import 'package:provider/provider.dart';
 
 class LogWorkTimeScreen extends StatefulWidget {
   final Issue issue;
-  final WorkTime worktime;
+  final TimeEntry worktime;
 
   LogWorkTimeScreen({this.issue, this.worktime});
 
@@ -19,21 +19,21 @@ class LogWorkTimeScreen extends StatefulWidget {
 class _LogWorkTimeScreenState extends State<LogWorkTimeScreen> {
   DateTime _date;
   int _hours;
-  WorktimesBloc _worktimesBloc;
+  TimeEntriesBloc _worktimesBloc;
   ProfileBloc _profileBloc;
 
   @override
   void initState() {
     super.initState();
     _date = widget.worktime == null ? DateTime.now() : widget.worktime.date;
-    _hours = widget.worktime == null ? null : widget.worktime.duration;
+    _hours = widget.worktime == null ? null : widget.worktime.minutes;
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (_worktimesBloc == null) {
-      _worktimesBloc = Provider.of<WorktimesBloc>(context);
+      _worktimesBloc = Provider.of<TimeEntriesBloc>(context);
     }
     if (_profileBloc == null) {
       _profileBloc = Provider.of<ProfileBloc>(context);
@@ -80,7 +80,7 @@ class _LogWorkTimeScreenState extends State<LogWorkTimeScreen> {
         // ),
         SizedBox(height: 10),
         Text(
-          widget.worktime == null ? widget.issue.name : widget.worktime.issueName,
+          widget.worktime == null ? widget.issue.subject : widget.worktime.issueName,
           style: Theme.of(context).textTheme.headline6,
         ),
         SizedBox(height: 20),
@@ -144,20 +144,20 @@ class _LogWorkTimeScreenState extends State<LogWorkTimeScreen> {
     print("${_date.toString()}  -  $_hours");
     if (widget.worktime == null) {
       var res = await _worktimesBloc.addWorktime(
-        WorkTime(
+        TimeEntry(
           id: 0,
-          duration: _hours,
+          minutes: _hours,
           date: _date,
           issueId: widget.issue.id,
           userId: _profileBloc.userId,
-          issueName: widget.issue.name,
+          issueName: widget.issue.subject,
         ),
       );
     } else {
       var res = await _worktimesBloc.editWorktime(
-        WorkTime(
+        TimeEntry(
           id: widget.worktime.id,
-          duration: _hours,
+          minutes: _hours,
           date: _date,
           issueId: widget.worktime.issueId,
           userId: _profileBloc.userId,

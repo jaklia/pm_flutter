@@ -1,25 +1,19 @@
-import 'package:pm_flutter/models/worktime.dart';
+import 'package:pm_flutter/models/timeentry.dart';
 
-List<WorkTime> worktimes = [
-  WorkTime(
-      id: 1,
-      date: DateTime.now(),
-      duration: 8,
-      issueId: 11,
-      userId: "asd",
-      issueName: "Issue 11"),
-  WorkTime(
+List<TimeEntry> worktimes = [
+  TimeEntry(id: 1, date: DateTime.now(), minutes: 8, issueId: 11, userId: 1, issueName: "Issue 11"),
+  TimeEntry(
       id: 1,
       date: DateTime.now().subtract(Duration(days: 1)),
-      duration: 8,
+      minutes: 8,
       issueId: 11,
-      userId: "asd",
+      userId: 1,
       issueName: "Issue 11"),
-  WorkTime(
+  TimeEntry(
       id: 1,
       date: DateTime.now().subtract(Duration(days: 2)),
-      duration: 8,
+      minutes: 8,
       issueId: 11,
-      userId: "asd",
+      userId: 2,
       issueName: "Issue 11"),
 ];

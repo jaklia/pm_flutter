@@ -66,12 +66,12 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
                     itemBuilder: (context, i) => ListTile(
                       onTap: () => _openIssueDetails(context, snapshot.data[i]),
                       title: Text(
-                        snapshot.data[i].name,
+                        snapshot.data[i].subject,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                       subtitle: Text(
-                        snapshot.data[i].description,
+                        snapshot.data[i].description ?? '', // TODO:
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
