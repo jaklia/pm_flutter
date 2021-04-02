@@ -189,7 +189,7 @@ class _LogWorkTimeScreenState extends State<LogWorkTimeScreen> {
         ),
       );
     } else {
-      var res = await _worktimesBloc.editWorktime(
+      await _worktimesBloc.editWorktime(
         TimeEntry(
           id: widget.worktime.id,
           minutes: _minutes,

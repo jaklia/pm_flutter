@@ -1,39 +1,49 @@
 import 'package:pm_flutter/bloc/timeentries/timeentries_repository.dart';
 import 'package:pm_flutter/models/timeentry.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
 
 class TimeEntriesBloc {
   final _repository = TimeEntriesRepository();
-  final _worktimes = BehaviorSubject<List<TimeEntry>>.seeded([]);
+  final _timeEntries = BehaviorSubject<List<TimeEntry>>.seeded([]);
 
-  get worktimes {
-    return _worktimes.stream;
+  ValueObservable<List<TimeEntry>> get timeEntries {
+    return _timeEntries.stream;
   }
 
   Future<void> getWorktimes(DateTime from, DateTime to) async {
     var res = await _repository.getWorktimes(from, to);
-    _worktimes.sink.add(res);
+    _timeEntries.sink.add(res);
   }
 
   Future<void> addWorktime(TimeEntry wt) async {
     var res = await _repository.addWorktime(wt);
-    _worktimes.sink.add(_worktimes.value..add(res));
+    var newList = List<TimeEntry>.from(_timeEntries.value);
+    newList.add(res);
+    _timeEntries.sink.add(newList);
   }
 
   Future<void> editWorktime(TimeEntry wt) async {
-    _repository.editWorktime(wt);
+    await _repository.editWorktime(wt);
+    var newList = List<TimeEntry>.from(_timeEntries.value);
+    var idx = newList.indexWhere((item) => item.id == wt.id);
+    newList.replaceRange(idx, idx + 1, [wt]);
+    _timeEntries.sink.add(newList);
   }
 
   Future<void> deleteWorktime(TimeEntry wt) async {
-    _repository.deleteWorktime(wt);
+    await _repository.deleteWorktime(wt);
+    var newList = List<TimeEntry>.from(_timeEntries.value);
+    newList.removeWhere((element) => element.id == wt.id);
+    _timeEntries.sink.add(newList);
   }
 
   Future<void> filter(DateTime from, DateTime to) async {
     var res = await _repository.filter(from, to);
-    _worktimes.sink.add(res);
+    _timeEntries.sink.add(res);
   }
 
   void dispose() {
-    _worktimes.close();
+    _timeEntries.close();
   }
 }

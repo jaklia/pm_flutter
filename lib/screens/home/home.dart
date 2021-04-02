@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
           _header(),
           Expanded(
             child: StreamBuilder<List<TimeEntry>>(
-              stream: _worktimesBloc.worktimes,
+              stream: _worktimesBloc.timeEntries,
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
                   return Container(
