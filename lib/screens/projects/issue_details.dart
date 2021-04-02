@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:pm_flutter/components/simple_info_row.dart';
 import 'package:pm_flutter/models/issue.dart';
 import 'package:pm_flutter/models/project.dart';
 import 'package:pm_flutter/screens/projects/log_worktime.dart';
@@ -29,7 +31,17 @@ class IssueDetailsScreen extends StatelessWidget {
               style: Theme.of(context).textTheme.headline6,
             ),
             SizedBox(height: 20),
-            Text(_issue.description, style: Theme.of(context).textTheme.bodyText2),
+            Text(_issue.description ?? "", style: Theme.of(context).textTheme.bodyText2),
+            SizedBox(height: 20),
+            SimpleInfoRow(
+              title: "Start date",
+              info: DateFormat.yMd().format(_issue.startDate),
+            ),
+            SizedBox(height: 20),
+            SimpleInfoRow(
+              title: "Due date",
+              info: DateFormat.yMd().format(_issue.dueDate),
+            ),
             SizedBox(height: 20),
             // TODO:  maybe: show logs for this issue
             Container(
