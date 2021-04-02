@@ -25,17 +25,17 @@ class TimeEntriesProvider {
     return list;
   }
 
-  Future<TimeEntry> addWorktime(TimeEntry wt) async {
-    var res = await Network.dio.post(Urls.WORKTIME, data: wt.toJson());
+  Future<TimeEntry> addTimeEntry(TimeEntry wt) async {
+    var res = await Network.dio.post(Urls.TIMEENTRY, data: wt.toJson());
     return TimeEntry.fromJson(res.data);
   }
 
   Future deleteWorktime(TimeEntry wt) async {
-    var res = await Network.dio.delete("${Urls.WORKTIME}/${wt.id}");
+    var res = await Network.dio.delete("${Urls.TIMEENTRY}/${wt.id}");
   }
 
   Future editWorktime(TimeEntry wt) async {
-    var res = await Network.dio.put("${Urls.WORKTIME}/${wt.id}");
+    var res = await Network.dio.put("${Urls.TIMEENTRY}/${wt.id}", data: wt.toJson());
   }
 
   Future<List<TimeEntry>> filter(DateTime from, DateTime to) {

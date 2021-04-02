@@ -9,7 +9,7 @@ class UsersProvider {
     // return mockUsers;
 
     var res = await Network.dio.get(Urls.USERS);
-    print(res.data.toString());
+    //        print(res.data.toString());
     //var tmp = jsonDecode(res.data);
     List<User> list = res.data.map<User>(
       (item) {

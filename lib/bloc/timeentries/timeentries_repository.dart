@@ -8,7 +8,7 @@ class TimeEntriesRepository {
   Future<List<TimeEntry>> getWorktimes(DateTime from, DateTime to) =>
       _provider.getWorktimes(from, to);
 
-  Future<TimeEntry> addWorktime(TimeEntry wt) => _provider.addWorktime(wt);
+  Future<TimeEntry> addWorktime(TimeEntry wt) => _provider.addTimeEntry(wt);
 
   Future<void> deleteWorktime(TimeEntry wt) => _provider.deleteWorktime(wt);
 

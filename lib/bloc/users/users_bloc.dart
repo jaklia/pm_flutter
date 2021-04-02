@@ -28,7 +28,7 @@ class UsersBloc {
   }
 
   Future<void> getUserWorktimes(User user) async {
-    final res = await _repository.getUserWorktimes(user.userId);
+    final res = await _repository.getUserWorktimes(user.id);
     _userWorktimes.sink.add(res);
     _currentUser.sink.add(user);
   }

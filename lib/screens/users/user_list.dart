@@ -69,7 +69,7 @@ class _UserListScreenState extends State<UserListScreen> {
               itemBuilder: (context, i) => ListTile(
                 onTap: () => _openUserDetails(context, snapshot.data[i]),
                 title: Text(
-                  _profileBloc.userId == snapshot.data[i].userId
+                  _profileBloc.userId == snapshot.data[i].id
                       ? '${snapshot.data[i].name} *'
                       : snapshot.data[i].name,
                 ),

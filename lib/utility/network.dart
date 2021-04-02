@@ -39,14 +39,15 @@ class Network {
       var token = await SharedPrefsManager.getToken();
       var t = "Bearer $token";
       options.headers["Authorization"] = t;
-      var asd = "asdasdasd";
+      print(options.toString());
     }
     return options;
   }, onResponse: (Response response) {
-    // Do something with response data
+    print(response.toString());
     return response; // continue
   }, onError: (DioError error) async {
     // Do something with response error
+    print(error.toString());
     // if (error.response?.statusCode == 403) {
     //   _dio.interceptors.requestLock.lock();
     //   _dio.interceptors.responseLock.lock();

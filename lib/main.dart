@@ -21,7 +21,9 @@ class MyApp extends StatelessWidget {
           dispose: (_, usersBloc) => usersBloc.dispose(),
         ),
         Provider<ProjectsBloc>(
-            create: (_) => ProjectsBloc(), dispose: (_, projectsBloc) => projectsBloc.dispose()),
+          create: (_) => ProjectsBloc(),
+          dispose: (_, projectsBloc) => projectsBloc.dispose(),
+        ),
         Provider<TimeEntriesBloc>(
           create: (_) => TimeEntriesBloc(),
           dispose: (_, worktimesBloc) => worktimesBloc.dispose(),

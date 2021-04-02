@@ -18,15 +18,26 @@ class LogWorkTimeScreen extends StatefulWidget {
 
 class _LogWorkTimeScreenState extends State<LogWorkTimeScreen> {
   DateTime _date;
-  int _hours;
+  int _minutes;
+  String _description;
   TimeEntriesBloc _worktimesBloc;
   ProfileBloc _profileBloc;
 
   @override
   void initState() {
     super.initState();
-    _date = widget.worktime == null ? DateTime.now() : widget.worktime.date;
-    _hours = widget.worktime == null ? null : widget.worktime.minutes;
+    if (widget.worktime == null) {
+      _date = DateTime.now();
+      _minutes = null;
+      _description = "";
+    } else {
+      _date = widget.worktime.date;
+      _minutes = widget.worktime.minutes;
+      _description = widget.worktime.description;
+    }
+    // _date = widget.worktime == null ? DateTime.now() : widget.worktime.date;
+    // _minutes = widget.worktime == null ? null : widget.worktime.minutes;
+    // _description = widget.worktime == null ? null : widget.worktime.description;
   }
 
   @override
@@ -56,6 +67,8 @@ class _LogWorkTimeScreenState extends State<LogWorkTimeScreen> {
             _dateInput(),
             SizedBox(height: 20),
             _wortimeInput(),
+            SizedBox(height: 20),
+            _descriptionInput(),
             SizedBox(height: 20),
             Container(
               width: double.infinity,
@@ -124,13 +137,13 @@ class _LogWorkTimeScreenState extends State<LogWorkTimeScreen> {
         Container(
           width: 50,
           child: TextFormField(
-            decoration: InputDecoration(hintText: "8"),
+            decoration: InputDecoration(hintText: "60"),
             keyboardType: TextInputType.number,
             textAlign: TextAlign.end,
-            initialValue: (_hours == null ? "" : _hours.toString()),
+            initialValue: (_minutes == null ? "" : _minutes.toString()),
             onFieldSubmitted: (text) {
               setState(() {
-                _hours = int.parse(text);
+                _minutes = int.parse(text);
               });
             },
           ),
@@ -139,29 +152,53 @@ class _LogWorkTimeScreenState extends State<LogWorkTimeScreen> {
     );
   }
 
+  Widget _descriptionInput() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Description',
+          style: Theme.of(context).textTheme.bodyText2.copyWith(color: Colors.grey),
+        ),
+        TextFormField(
+          initialValue: _description ?? "",
+          onFieldSubmitted: (text) {
+            setState(() {
+              _description = text;
+            });
+          },
+        ),
+      ],
+    );
+  }
+
   void _save(BuildContext context) async {
     // TODO:     user / userId,    issue / issueId  ????
-    print("${_date.toString()}  -  $_hours");
+    print("${_date.toString()}  -  $_minutes");
     if (widget.worktime == null) {
       var res = await _worktimesBloc.addWorktime(
         TimeEntry(
           id: 0,
-          minutes: _hours,
+          minutes: _minutes,
           date: _date,
           issueId: widget.issue.id,
           userId: _profileBloc.userId,
           issueName: widget.issue.subject,
+          userName: "", // don't need this now, the backend will send back the correct value
+          description: _description,
         ),
       );
     } else {
       var res = await _worktimesBloc.editWorktime(
         TimeEntry(
           id: widget.worktime.id,
-          minutes: _hours,
+          minutes: _minutes,
           date: _date,
           issueId: widget.worktime.issueId,
-          userId: _profileBloc.userId,
+          userId: widget.worktime.userId,
           issueName: widget.worktime.issueName,
+          userName: widget.worktime.userName,
+          description: _description,
         ),
       );
     }

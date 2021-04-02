@@ -1,6 +1,6 @@
 class Message {
   String text;
-  String senderId;
+  int senderId;
 
   Message({this.senderId, this.text});
 }

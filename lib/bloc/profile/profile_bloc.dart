@@ -11,8 +11,8 @@ class ProfileBloc {
     return _profile.stream;
   }
 
-  get userId {
-    return _profile.value.userId;
+  int get userId {
+    return _profile.value.id;
   }
 
   get isAdmin {
@@ -20,13 +20,13 @@ class ProfileBloc {
   }
 
   Future<bool> login(String email, String password) async {
-    // try {
-    var res = await _repository.login(email, password);
-    _profile.sink.add(res);
-    return true;
-    // } catch (e) {
-    //   return false;
-    // }
+    try {
+      var res = await _repository.login(email, password);
+      _profile.sink.add(res);
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   logout() {

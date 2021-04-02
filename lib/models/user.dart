@@ -12,13 +12,13 @@ enum Role {
 @JsonSerializable()
 class User {
   @JsonKey(name: "id")
-  int userId;
+  int id;
   @JsonKey(name: "userName")
   String name;
   String email;
   Role role;
 
-  User({@required this.name, this.role, this.email, this.userId});
+  User({@required this.name, this.role, this.email, this.id});
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
   Map<String, dynamic> toJson() => _$UserToJson(this);

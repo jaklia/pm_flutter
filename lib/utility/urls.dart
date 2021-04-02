@@ -10,7 +10,7 @@ class Urls {
 
   static const PROJECT = "/api/projects";
   static const ISSUE = "/api/issues";
-  static const WORKTIME = "/api/worktimes";
+  static const TIMEENTRY = "/api/timeentries";
   static const USERS = "/api/users";
 
   static const ADMIN = "/api/admin/worktime";

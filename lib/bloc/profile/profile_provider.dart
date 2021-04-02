@@ -12,13 +12,15 @@ class ProfileProvider {
     //       name: email, role: Role.Admin, userId: 1, email: "test@test.hu"),
     // );
 
-    var res =
-        await Network.dio.post(Urls.LOGIN, data: {"username": userName, "password": password});
+    var res = await Network.dio.post(
+      Urls.LOGIN,
+      data: {"username": userName, "password": password},
+    );
 
     var token = res.data["accessToken"];
     //var user = User.fromJson(res.data["user"]);
 
-    print(res.toString());
+    // print(res.toString());
 
     //return user;
     return token;
@@ -32,7 +34,7 @@ class ProfileProvider {
     var res = await Network.dio.get('${Urls.USERS}/$userId');
     var user = User.fromJson(res.data);
 
-    print(res.toString());
+    //print(res.toString());
 
     return user;
   }

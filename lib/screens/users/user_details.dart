@@ -26,18 +26,18 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
 
   TextEditingController msgController = TextEditingController(text: "");
   List<Message> messages = [
-    Message(text: "1 Lorem ipsum dolor sit amet", senderId: "10"),
-    Message(text: "2 Sed ut perspiciatis unde omnis iste natus error sit", senderId: "10"),
-    Message(text: "3 At vero eos et accusamus et iusto odio dignissimos", senderId: "10"),
-    Message(text: "4 Temporibus autem quibusdam et aut officiis", senderId: "10"),
-    Message(text: "5 Lorem ipsum dolor sit amet", senderId: "10"),
-    Message(text: "6 Sed ut perspiciatis unde omnis iste natus error sit", senderId: "10"),
-    Message(text: "7 At vero eos et accusamus et iusto odio dignissimos", senderId: "10"),
-    Message(text: "8 Temporibus autem quibusdam et aut officiis", senderId: "10"),
-    Message(text: "9 Lorem ipsum dolor sit amet", senderId: "10"),
-    Message(text: "10 Sed ut perspiciatis unde omnis iste natus error sit", senderId: "10"),
-    Message(text: "11 At vero eos et accusamus et iusto odio dignissimos", senderId: "10"),
-    Message(text: "12 Temporibus autem quibusdam et aut officiis", senderId: "10"),
+    Message(text: "1 Lorem ipsum dolor sit amet", senderId: 10),
+    Message(text: "2 Sed ut perspiciatis unde omnis iste natus error sit", senderId: 10),
+    Message(text: "3 At vero eos et accusamus et iusto odio dignissimos", senderId: 10),
+    Message(text: "4 Temporibus autem quibusdam et aut officiis", senderId: 10),
+    Message(text: "5 Lorem ipsum dolor sit amet", senderId: 10),
+    Message(text: "6 Sed ut perspiciatis unde omnis iste natus error sit", senderId: 1),
+    Message(text: "7 At vero eos et accusamus et iusto odio dignissimos", senderId: 2),
+    Message(text: "8 Temporibus autem quibusdam et aut officiis", senderId: 3),
+    Message(text: "9 Lorem ipsum dolor sit amet", senderId: 4),
+    Message(text: "10 Sed ut perspiciatis unde omnis iste natus error sit", senderId: 1),
+    Message(text: "11 At vero eos et accusamus et iusto odio dignissimos", senderId: 2),
+    Message(text: "12 Temporibus autem quibusdam et aut officiis", senderId: 3),
   ];
 
   @override

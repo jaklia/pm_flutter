@@ -13,7 +13,7 @@ class ProjectsProvider {
     // return Future.delayed(Duration(seconds: 1), () => mockProjects);
 
     var res = await Network.dio.get(Urls.PROJECT);
-    print(res.data.toString());
+    //      print(res.data.toString());
     //var tmp = jsonDecode(res.data);
     List<Project> list = res.data.map<Project>(
       (item) {
@@ -37,7 +37,7 @@ class ProjectsProvider {
       '${Urls.PROJECT}/$projectId/issues',
     );
     // var res = await Network.dio.get(Urls.ISSUE, queryParameters: {"projectId": projectId});
-    print(res.data.toString());
+//       print(res.data.toString());
     List<Issue> list = res.data.map<Issue>(
       (item) {
         Map<String, dynamic> asd = item;
