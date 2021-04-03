@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:pm_flutter/app_localizations.dart';
 import 'package:pm_flutter/components/simple_info_row.dart';
 import 'package:pm_flutter/models/issue.dart';
 import 'package:pm_flutter/models/project.dart';
@@ -35,12 +36,16 @@ class IssueDetailsScreen extends StatelessWidget {
             SizedBox(height: 20),
             SimpleInfoRow(
               title: "Start date",
-              info: DateFormat.yMd().format(_issue.startDate),
+              info: DateFormat.yMd(
+                AppLocalizations.of(context).locale.languageCode,
+              ).format(_issue.startDate),
             ),
             SizedBox(height: 20),
             SimpleInfoRow(
               title: "Due date",
-              info: DateFormat.yMd().format(_issue.dueDate),
+              info: DateFormat.yMd(
+                AppLocalizations.of(context).locale.languageCode,
+              ).format(_issue.dueDate),
             ),
             SizedBox(height: 20),
             // TODO:  maybe: show logs for this issue

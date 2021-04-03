@@ -1,8 +1,8 @@
 class Strings {
-  static const login = "Login";
+  static const login = "login";
 
-  static const password = "Password";
-  static const username = "Username";
+  static const password = "password";
+  static const username = "username";
 
   static const home = "Home";
   static const projects = "Projects";

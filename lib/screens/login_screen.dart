@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pm_flutter/app_localizations.dart';
 import 'package:pm_flutter/bloc/profile/profile_bloc.dart';
+import 'package:pm_flutter/constants/localization.dart';
 import 'package:pm_flutter/screens/tabs.dart';
 import 'package:pm_flutter/utility/network.dart';
 import 'package:provider/provider.dart';
@@ -33,39 +35,79 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Login"),
-      ),
+      // appBar: AppBar(
+      //   title: Text(AppLocalizations.of(context).translate(Strings.login)),
+      // ),
       body: Container(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: <Widget>[
-            TextField(
-              controller: _nameController,
-              decoration: InputDecoration(labelText: "Email"),
-              keyboardType: TextInputType.emailAddress,
-              textInputAction: TextInputAction.next,
-              onSubmitted: (text) {
-                FocusScope.of(context).requestFocus(_focusNode);
-              },
-            ),
-            TextField(
-              obscureText: true,
-              controller: _passwordController,
-              decoration: InputDecoration(labelText: "Password"),
-              keyboardType: TextInputType.visiblePassword,
-              textInputAction: TextInputAction.done,
-              focusNode: _focusNode,
-            ),
-            SizedBox(height: 16),
-            Container(
-              width: double.infinity,
-              child: ElevatedButton(
-                child: Text("Login"),
-                onPressed: onLogin,
+        padding: const EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              //Colors.indigo.withOpacity(0.3),
+              //Colors.green.withOpacity(0.3),
+              // Colors.amber.withOpacity(0.2),
+              Colors.grey.withOpacity(0.3),
+              Colors.blue.withOpacity(0.2),
+              Colors.blue.withOpacity(0.2),
+              Colors.grey.withOpacity(0.3),
+            ],
+          ),
+        ),
+        child: Center(
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.grey.shade200,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.4),
+                  offset: Offset(0, 5),
+                  blurRadius: 20,
+                  spreadRadius: 0,
+                )
+              ],
+              borderRadius: BorderRadius.all(
+                Radius.circular(16),
               ),
-            )
-          ],
+            ),
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                TextField(
+                  controller: _nameController,
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context).translate(Strings.username),
+                  ),
+                  keyboardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.next,
+                  onSubmitted: (text) {
+                    FocusScope.of(context).requestFocus(_focusNode);
+                  },
+                ),
+                TextField(
+                  obscureText: true,
+                  controller: _passwordController,
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context).translate(Strings.password),
+                  ),
+                  keyboardType: TextInputType.visiblePassword,
+                  textInputAction: TextInputAction.done,
+                  focusNode: _focusNode,
+                ),
+                SizedBox(height: 16),
+                Container(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    child: Text(AppLocalizations.of(context).translate(Strings.login)),
+                    onPressed: onLogin,
+                  ),
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );
