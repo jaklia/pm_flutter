@@ -11,6 +11,8 @@ class Urls {
   static const PROJECT = "/api/projects";
   static const ISSUE = "/api/issues";
   static const TIMEENTRY = "/api/timeentries";
+  static const MEETING = "/api/meetings";
+  static const ROOM = "/api/rooms";
   static const USERS = "/api/users";
 
   static const ADMIN = "/api/admin/worktime";
