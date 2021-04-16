@@ -18,11 +18,12 @@ class Network {
       //   it's probably only because of debug
       //     when app is published to azure, probably won't need it anymore
       //   or maybe because https is enabled, then no idea how to get a certificate
-      (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-          (HttpClient client) {
-        client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
-        return client;
-      };
+      // first idea was right, backend is now on azure, and mobile client works w/o this hack
+      //     (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+      //         (HttpClient client) {
+      //       client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+      //       return client;
+      //     };
     }
   }
 
