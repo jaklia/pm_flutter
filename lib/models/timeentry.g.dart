@@ -33,11 +33,13 @@ Map<String, dynamic> _$TimeEntryToJson(TimeEntry instance) => <String, dynamic>{
 WorkTimeList _$WorkTimeListFromJson(Map<String, dynamic> json) {
   return WorkTimeList(
     (json['worktimes'] as List)
-        ?.map((e) => e == null ? null : TimeEntry.fromJson(e as Map<String, dynamic>))
+        ?.map((e) =>
+            e == null ? null : TimeEntry.fromJson(e as Map<String, dynamic>))
         ?.toList(),
   );
 }
 
-Map<String, dynamic> _$WorkTimeListToJson(WorkTimeList instance) => <String, dynamic>{
+Map<String, dynamic> _$WorkTimeListToJson(WorkTimeList instance) =>
+    <String, dynamic>{
       'worktimes': instance.worktimes,
     };

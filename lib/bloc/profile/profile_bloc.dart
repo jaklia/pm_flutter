@@ -25,6 +25,7 @@ class ProfileBloc {
       _profile.sink.add(res);
       return true;
     } catch (e) {
+      print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx");
       return false;
     }
   }

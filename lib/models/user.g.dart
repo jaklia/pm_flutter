@@ -32,7 +32,9 @@ T _$enumDecode<T>(
         '${enumValues.values.join(', ')}');
   }
 
-  final value = enumValues.entries.singleWhere((e) => e.value == source, orElse: () => null)?.key;
+  final value = enumValues.entries
+      .singleWhere((e) => e.value == source, orElse: () => null)
+      ?.key;
 
   if (value == null && unknownValue == null) {
     throw ArgumentError('`$source` is not one of the supported values: '
@@ -60,7 +62,8 @@ const _$RoleEnumMap = {
 UserList _$UserListFromJson(Map<String, dynamic> json) {
   return UserList(
     (json['users'] as List)
-        ?.map((e) => e == null ? null : User.fromJson(e as Map<String, dynamic>))
+        ?.map(
+            (e) => e == null ? null : User.fromJson(e as Map<String, dynamic>))
         ?.toList(),
   );
 }

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pm_flutter/app_localizations.dart';
+import 'package:pm_flutter/bloc/leaves/leaves_bloc.dart';
+import 'package:pm_flutter/bloc/meeting/meeting_bloc.dart';
 import 'package:pm_flutter/bloc/profile/profile_bloc.dart';
 import 'package:pm_flutter/bloc/projects/projects_bloc.dart';
+import 'package:pm_flutter/bloc/room/room_bloc.dart';
 import 'package:pm_flutter/bloc/users/users_bloc.dart';
 import 'package:pm_flutter/bloc/timeentries/timeentries_bloc.dart';
 import 'package:pm_flutter/screens/login_screen.dart';
@@ -35,6 +38,18 @@ class MyApp extends StatelessWidget {
           lazy: false,
           dispose: (_, profileBloc) => profileBloc.dispose(),
         ),
+        Provider<MeetingsBloc>(
+          create: (_) => MeetingsBloc(),
+          dispose: (_, meetingsBloc) => meetingsBloc.dispose(),
+        ),
+        Provider<RoomBloc>(
+          create: (_) => RoomBloc(),
+          dispose: (_, roomBloc) => roomBloc.dispose(),
+        ),
+        Provider<LeavesBloc>(
+          create: (_) => LeavesBloc(),
+          dispose: (_, leavesBloc) => leavesBloc.dispose(),
+        )
       ],
       child: MaterialApp(
         title: 'pm_flutter',

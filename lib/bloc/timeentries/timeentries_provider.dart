@@ -25,7 +25,7 @@ class TimeEntriesProvider {
     return list;
   }
 
-  Future<void> addTimeEntry(TimeEntry wt) async {
+  Future<TimeEntry> addTimeEntry(TimeEntry wt) async {
     var res = await Network.dio.post(Urls.TIMEENTRY, data: wt.toJson());
     return TimeEntry.fromJson(res.data);
   }
