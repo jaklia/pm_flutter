@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pm_flutter/bloc/profile/profile_bloc.dart';
+import 'package:pm_flutter/screens/leaves.dart';
 import 'package:pm_flutter/screens/login_screen.dart';
+import 'package:pm_flutter/screens/tmp.dart';
 import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -26,14 +28,37 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Settings")),
-      body: InkWell(
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          width: double.infinity,
-          child: Text("Logout"),
-        ),
-        onTap: _onLogout,
+      appBar: AppBar(title: Text('Settings')),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          InkWell(
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              child: Text('Profile'),
+            ),
+            onTap: () => {},
+          ),
+          InkWell(
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              child: Text('Leaves'),
+            ),
+            onTap: () => {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (ctx) => LeavesScreen()),
+              )
+            },
+          ),
+          InkWell(
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              width: double.infinity,
+              child: Text("Logout"),
+            ),
+            onTap: _onLogout,
+          ),
+        ],
       ),
     );
   }
