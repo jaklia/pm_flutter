@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pm_flutter/app_localizations.dart';
+import 'package:pm_flutter/bloc/leaves/leaves_bloc.dart';
 import 'package:pm_flutter/bloc/meeting/meeting_bloc.dart';
 import 'package:pm_flutter/bloc/profile/profile_bloc.dart';
 import 'package:pm_flutter/bloc/projects/projects_bloc.dart';
@@ -44,6 +45,10 @@ class MyApp extends StatelessWidget {
         Provider<RoomBloc>(
           create: (_) => RoomBloc(),
           dispose: (_, roomBloc) => roomBloc.dispose(),
+        ),
+        Provider<LeavesBloc>(
+          create: (_) => LeavesBloc(),
+          dispose: (_, leavesBloc) => leavesBloc.dispose(),
         )
       ],
       child: MaterialApp(

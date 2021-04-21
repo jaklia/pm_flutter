@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'meeting.dart';
+part of 'leave.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Meeting _$MeetingFromJson(Map<String, dynamic> json) {
-  return Meeting(
+Leave _$LeaveFromJson(Map<String, dynamic> json) {
+  return Leave(
     id: json['id'] as int,
     startDate: json['startDate'] == null
         ? null
@@ -15,19 +15,15 @@ Meeting _$MeetingFromJson(Map<String, dynamic> json) {
     endDate: json['endDate'] == null
         ? null
         : DateTime.parse(json['endDate'] as String),
-    room: json['room'] == null
-        ? null
-        : Room.fromJson(json['room'] as Map<String, dynamic>),
-    userIds: (json['userIds'] as List)?.map((e) => e as int)?.toList(),
-    title: json['title'] as String,
+    approved: json['approved'] as bool,
+    userId: json['userId'] as int,
   );
 }
 
-Map<String, dynamic> _$MeetingToJson(Meeting instance) => <String, dynamic>{
+Map<String, dynamic> _$LeaveToJson(Leave instance) => <String, dynamic>{
       'id': instance.id,
-      'title': instance.title,
       'startDate': instance.startDate?.toIso8601String(),
       'endDate': instance.endDate?.toIso8601String(),
-      'room': instance.room?.toJson(),
-      'userIds': instance.userIds,
+      'approved': instance.approved,
+      'userId': instance.userId,
     };
