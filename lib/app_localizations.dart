@@ -3,6 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+// just tried this, 'cause the whole AppLocalization.of()... thing is toooo long
+//   not sure if it's ok (but it seems to be working)
+var translate = (BuildContext context, String key) => AppLocalizations.of(context).translate(key);
+
 class AppLocalizations {
   final Locale locale;
 
@@ -19,7 +23,7 @@ class AppLocalizations {
 
   Map<String, String> _localizedStrings;
 
-  Future<bool> load() async {
+  Future<bool> loadAssets() async {
     // Load the language JSON file from the "lang" folder
     String jsonString = await rootBundle.loadString('assets/lang/${locale.languageCode}.json');
     Map<String, dynamic> jsonMap = json.decode(jsonString);
@@ -54,7 +58,7 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   Future<AppLocalizations> load(Locale locale) async {
     // AppLocalizations class is where the JSON loading actually runs
     AppLocalizations localizations = new AppLocalizations(locale);
-    await localizations.load();
+    await localizations.loadAssets();
     return localizations;
   }
 

@@ -1,5 +1,13 @@
 {
     "login": "Bejelentkezés",
     "username": "Név",
-    "password": "Jelszó"
+    "password": "Jelszó",
+    "__leaves": "",
+    "leaves": "Szabadságok",
+    "leaveRequest": "Igénylés",
+    "leaveStatus": "Állapot",
+    "leaveApproved": "Jóváhagyva",
+    "leaveNotApproved": "Nincs jóváhagyva",
+    "leaveStartDate": "Mettől",
+    "leaveEndDate": "Meddig"
 }

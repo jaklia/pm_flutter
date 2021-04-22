@@ -96,6 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   keyboardType: TextInputType.visiblePassword,
                   textInputAction: TextInputAction.done,
                   focusNode: _focusNode,
+                  onSubmitted: (_) {},
                 ),
                 SizedBox(height: 16),
                 Container(

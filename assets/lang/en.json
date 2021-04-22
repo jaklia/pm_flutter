@@ -1,5 +1,13 @@
 {
     "login": "Login",
     "username": "Username",
-    "password": "Password"
+    "password": "Password",
+    "__leaves": "",
+    "leaves": "Absences",
+    "leaveRequest": "Request",
+    "leaveStatus": "Status",
+    "leaveApproved": "Approved",
+    "leaveNotApproved": "Not Approved",
+    "leaveStartDate": "From",
+    "leaveEndDate": "To"
 }
