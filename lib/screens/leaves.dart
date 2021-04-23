@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:pm_flutter/app_localizations.dart';
 import 'package:pm_flutter/bloc/leaves/leaves_bloc.dart';
+import 'package:pm_flutter/components/form_dialog.dart';
 import 'package:pm_flutter/components/simple_info_row.dart';
 import 'package:pm_flutter/constants/localization.dart';
 import 'package:pm_flutter/models/leave.dart';
@@ -21,43 +22,6 @@ class _LeavesScreenState extends State<LeavesScreen> {
     super.didChangeDependencies();
     _leavesBloc = Provider.of(context);
     _leavesBloc.getLeaves();
-  }
-
-  Widget editLeaveFormDialog(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: FractionallySizedBox(
-        heightFactor: 0.75,
-        child: Material(
-          color: Colors.transparent,
-          child: Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(16),
-              ),
-              color: Colors.white,
-            ),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Szabadság igénylése"),
-                    // InkWell(
-                    //   child: Icon(Icons.close),
-                    //   onTap: () {},
-                    // )
-                  ],
-                ),
-                Divider(),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
   }
 
   @override
@@ -81,7 +45,13 @@ class _LeavesScreenState extends State<LeavesScreen> {
                   ),
                   onPressed: () => showDialog(
                     context: context,
-                    builder: editLeaveFormDialog,
+                    builder: (_) => FormDialog(
+                      title: 'Szabadság igénylése',
+                      children: [
+                        Text("data"),
+                        Text("data"),
+                      ],
+                    ),
                     barrierDismissible: false,
                   ),
                 ),
