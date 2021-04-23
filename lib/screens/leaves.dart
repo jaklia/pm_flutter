@@ -23,6 +23,43 @@ class _LeavesScreenState extends State<LeavesScreen> {
     _leavesBloc.getLeaves();
   }
 
+  Widget editLeaveFormDialog(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: FractionallySizedBox(
+        heightFactor: 0.75,
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(16),
+              ),
+              color: Colors.white,
+            ),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Szabadság igénylése"),
+                    // InkWell(
+                    //   child: Icon(Icons.close),
+                    //   onTap: () {},
+                    // )
+                  ],
+                ),
+                Divider(),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +79,11 @@ class _LeavesScreenState extends State<LeavesScreen> {
                   child: Text(
                     AppLocalizations.of(context).translate(Strings.leaveRequest),
                   ),
-                  onPressed: () => {},
+                  onPressed: () => showDialog(
+                    context: context,
+                    builder: editLeaveFormDialog,
+                    barrierDismissible: false,
+                  ),
                 ),
               ),
               Expanded(

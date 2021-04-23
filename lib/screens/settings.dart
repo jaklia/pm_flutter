@@ -29,36 +29,40 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Settings')),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          InkWell(
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              child: Text('Profile'),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            InkWell(
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                child: Text('Profile'),
+              ),
+              onTap: () => {},
             ),
-            onTap: () => {},
-          ),
-          InkWell(
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              child: Text('Leaves'),
+            Divider(),
+            InkWell(
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                child: Text('Leaves'),
+              ),
+              onTap: () => {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (ctx) => LeavesScreen()),
+                )
+              },
             ),
-            onTap: () => {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (ctx) => LeavesScreen()),
-              )
-            },
-          ),
-          InkWell(
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              width: double.infinity,
-              child: Text("Logout"),
+            Divider(),
+            InkWell(
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                child: Text("Logout"),
+              ),
+              onTap: _onLogout,
             ),
-            onTap: _onLogout,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
