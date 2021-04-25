@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:pm_flutter/models/leave.dart';
 
 class FormDialog extends StatelessWidget {
   final String title;
   final List<Widget> children;
+  final String cancelText;
   final Function onSubmit;
+  final String submitText;
+  final Function onCancel;
+  final Function onClose;
 
-  FormDialog({this.title, this.children, this.onSubmit});
+  FormDialog({
+    @required this.title,
+    @required this.children,
+    @required this.onSubmit,
+    @required this.cancelText,
+    @required this.submitText,
+    @required this.onCancel,
+    @required this.onClose,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -51,15 +64,13 @@ class FormDialog extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: Text('Cancel'),
+          onPressed: onCancel,
+          child: Text(cancelText),
         ),
         SizedBox(width: 10),
         ElevatedButton(
-          onPressed: () {},
-          child: Text('Request'),
+          onPressed: onSubmit,
+          child: Text(submitText),
         ),
       ],
     );
@@ -75,9 +86,7 @@ class FormDialog extends StatelessWidget {
         ),
         IconButton(
           icon: Icon(Icons.close),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+          onPressed: onClose,
         ),
       ],
     );

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:pm_flutter/app_localizations.dart';
 import 'package:pm_flutter/bloc/leaves/leaves_bloc.dart';
-import 'package:pm_flutter/components/form_dialog.dart';
+import 'package:pm_flutter/components/edit_leave_dialog.dart';
 import 'package:pm_flutter/components/simple_info_row.dart';
 import 'package:pm_flutter/constants/localization.dart';
 import 'package:pm_flutter/models/leave.dart';
@@ -14,8 +13,20 @@ class LeavesScreen extends StatefulWidget {
   _LeavesScreenState createState() => _LeavesScreenState();
 }
 
+class Asd {
+  Asd(int a, int b);
+}
+
 class _LeavesScreenState extends State<LeavesScreen> {
   LeavesBloc _leavesBloc;
+  DateTime _from, _to;
+
+  @override
+  void initState() {
+    super.initState();
+    _from = DateTime.now();
+    _to = DateTime.now();
+  }
 
   @override
   void didChangeDependencies() {
@@ -45,13 +56,7 @@ class _LeavesScreenState extends State<LeavesScreen> {
                   ),
                   onPressed: () => showDialog(
                     context: context,
-                    builder: (_) => FormDialog(
-                      title: 'Szabadság igénylése',
-                      children: [
-                        Text("data"),
-                        Text("data"),
-                      ],
-                    ),
+                    builder: (_) => EditLeaveDialog(),
                     barrierDismissible: false,
                   ),
                 ),

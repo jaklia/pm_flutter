@@ -4,10 +4,11 @@ class Strings {
   static const password = "password";
   static const username = "username";
 
+  static const cancel = "cancel";
+
   static const leaves = "leaves";
   static const leaveRequest = "leaveRequest";
   static const leaveStatus = "leaveStatus";
-
   static const leaveAppr = "leaveApproved";
   static const leaveNotAppr = "leaveNotApproved";
   static const leaveStartDate = "leaveStartDate";
