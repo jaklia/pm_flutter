@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
-enum TabItem { home, projects, calendar, users, settings }
+enum TabItem { home, projects, calendar, users, profile }
 
 Map<TabItem, String> tabName = {
   TabItem.home: 'Home',
   TabItem.projects: 'Projects',
   TabItem.calendar: 'Calendar',
   TabItem.users: 'Users',
-  TabItem.settings: 'Settings',
+  TabItem.profile: 'Profile',
 };
 
 Map<TabItem, IconData> tabIcon = {
   TabItem.home: Icons.home,
   TabItem.projects: Icons.list,
   TabItem.calendar: Icons.calendar_today,
-  TabItem.users: Icons.people,
-  TabItem.settings: Icons.settings
+  TabItem.users: Icons.group,
+  TabItem.profile: Icons.person,
 };
 
 Map<TabItem, MaterialColor> activeTabColor = {
@@ -23,7 +23,7 @@ Map<TabItem, MaterialColor> activeTabColor = {
   TabItem.projects: Colors.blue, //Colors.green,
   TabItem.calendar: Colors.blue,
   TabItem.users: Colors.blue,
-  TabItem.settings: Colors.blue, //Colors.amber,
+  TabItem.profile: Colors.blue, //Colors.amber,
 };
 
 class BottomNavigation extends StatelessWidget {
@@ -40,7 +40,7 @@ class BottomNavigation extends StatelessWidget {
         _buildItem(context, tabItem: TabItem.projects),
         _buildItem(context, tabItem: TabItem.calendar),
         _buildItem(context, tabItem: TabItem.users),
-        _buildItem(context, tabItem: TabItem.settings)
+        _buildItem(context, tabItem: TabItem.profile)
       ],
       onTap: (index) => onSelectTab(
         TabItem.values[index],

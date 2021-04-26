@@ -5,16 +5,16 @@ import 'package:pm_flutter/screens/login_screen.dart';
 import 'package:pm_flutter/screens/tmp.dart';
 import 'package:provider/provider.dart';
 
-class SettingsScreen extends StatefulWidget {
+class ProfileScreen extends StatefulWidget {
   final Function pushReplacement;
 
-  SettingsScreen(this.pushReplacement);
+  ProfileScreen(this.pushReplacement);
 
   @override
-  _SettingsScreenState createState() => _SettingsScreenState();
+  _ProfileScreenState createState() => _ProfileScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
+class _ProfileScreenState extends State<ProfileScreen> {
   ProfileBloc _profileBloc;
 
   @override
@@ -67,8 +67,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  void _onLogout() {
-    _profileBloc.logout();
+  void _onLogout() async {
+    await _profileBloc.logout();
 
     print(Navigator.of(context).toString());
 

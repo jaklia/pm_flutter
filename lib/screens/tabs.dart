@@ -16,11 +16,11 @@ class TabScreenState extends State<TabScreen> {
   TabItem _currentTab = TabItem.home;
   Map<TabItem, GlobalKey<NavigatorState>> _navigatorKeys = {
     // not sure what this debugLabel does, or how to access it
-    TabItem.home: GlobalKey<NavigatorState>(debugLabel: 'HOME TAB'),
-    TabItem.projects: GlobalKey<NavigatorState>(debugLabel: 'PROJECTS TAB'),
-    TabItem.calendar: GlobalKey<NavigatorState>(debugLabel: 'CALENDAR TAB'),
-    TabItem.users: GlobalKey<NavigatorState>(debugLabel: 'USERS TAB'),
-    TabItem.settings: GlobalKey<NavigatorState>(debugLabel: 'SETTINGS TAB'),
+    TabItem.home: GlobalKey<NavigatorState>(debugLabel: 'HOME_TAB'),
+    TabItem.projects: GlobalKey<NavigatorState>(debugLabel: 'PROJECTS_TAB'),
+    TabItem.calendar: GlobalKey<NavigatorState>(debugLabel: 'CALENDAR_TAB'),
+    TabItem.users: GlobalKey<NavigatorState>(debugLabel: 'USERS_TAB'),
+    TabItem.profile: GlobalKey<NavigatorState>(debugLabel: 'PROFILE_TAB'),
   };
 
   void _selectTab(TabItem tabItem) {
@@ -55,7 +55,7 @@ class TabScreenState extends State<TabScreen> {
           _buildOffstageNavigator(TabItem.projects),
           _buildOffstageNavigator(TabItem.calendar),
           _buildOffstageNavigator(TabItem.users),
-          _buildOffstageNavigator(TabItem.settings),
+          _buildOffstageNavigator(TabItem.profile),
         ]),
         bottomNavigationBar: BottomNavigation(
           currentTab: _currentTab,
@@ -91,8 +91,8 @@ class TabScreenState extends State<TabScreen> {
                 return CalendarScreen();
               case TabItem.users:
                 return UserListScreen();
-              case TabItem.settings:
-                return SettingsScreen(_pushReplacement);
+              case TabItem.profile:
+                return ProfileScreen(_pushReplacement);
               //   must pass this to settigsScreen (this context is needed to pop the screens correctly at logout)
               default:
                 return TMPScreen();

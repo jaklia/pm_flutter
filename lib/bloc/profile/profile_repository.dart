@@ -6,15 +6,19 @@ import 'package:pm_flutter/utility/token_manager.dart';
 class ProfileRepository {
   final _provider = ProfileProvider();
 
-  Future<User> login(String email, String password) async {
+  Future<int> login(String email, String password) async {
     var token = await _provider.login(email, password);
     var success = await SharedPrefsManager.saveToken(token);
     var id = TokenManager.getUserId(token);
-    var user = await getProfile(id);
-    return user;
+    // var user = await getProfile(id);
+    // return user;
+    return id;
   }
 
   Future<User> getProfile(int userId) => _provider.getProfile(userId);
 
-  logout() => _provider.logout();
+  Future<void> logout() async {
+    await _provider.logout();
+    await SharedPrefsManager.removeToken();
+  }
 }

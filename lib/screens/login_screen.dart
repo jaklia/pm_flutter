@@ -3,7 +3,6 @@ import 'package:pm_flutter/app_localizations.dart';
 import 'package:pm_flutter/bloc/profile/profile_bloc.dart';
 import 'package:pm_flutter/constants/localization.dart';
 import 'package:pm_flutter/screens/tabs.dart';
-import 'package:pm_flutter/utility/network.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -16,6 +15,13 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordController = TextEditingController(text: "Asdf123.");
   final _focusNode = FocusNode();
   ProfileBloc _profileBloc;
+  bool _loading;
+
+  @override
+  void initState() {
+    super.initState();
+    _loading = false;
+  }
 
   @override
   void didChangeDependencies() {
@@ -102,8 +108,26 @@ class _LoginScreenState extends State<LoginScreen> {
                 Container(
                   width: double.infinity,
                   child: ElevatedButton(
-                    child: Text(AppLocalizations.of(context).translate(Strings.login)),
-                    onPressed: onLogin,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          AppLocalizations.of(context).translate(Strings.login),
+                        ),
+                        SizedBox(width: 10),
+                        _loading
+                            ? SizedBox(
+                                height: 16,
+                                width: 16,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  //valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                ),
+                              )
+                            : Icon(Icons.login),
+                      ],
+                    ),
+                    onPressed: _loading ? null : onLogin,
                   ),
                 )
               ],
@@ -137,10 +161,21 @@ class _LoginScreenState extends State<LoginScreen> {
         },
       );
     } else {
+      setState(() {
+        _loading = true;
+      });
       var res = await _profileBloc.login(_nameController.text, _passwordController.text);
 
       if (res) {
-        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => TabScreen()));
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => TabScreen(),
+          ),
+        );
+      } else {
+        setState(() {
+          _loading = false;
+        });
       }
     }
   }

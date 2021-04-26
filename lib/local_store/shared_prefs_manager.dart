@@ -14,4 +14,9 @@ class SharedPrefsManager {
     var token = prefs.getString(_tokenKey);
     return token;
   }
+
+  static Future<bool> removeToken() async {
+    var prefs = await SharedPreferences.getInstance();
+    return await prefs.remove(_tokenKey);
+  }
 }
