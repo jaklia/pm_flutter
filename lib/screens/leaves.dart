@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pm_flutter/app_localizations.dart';
 import 'package:pm_flutter/bloc/leaves/leaves_bloc.dart';
+import 'package:pm_flutter/bloc/profile/profile_bloc.dart';
 import 'package:pm_flutter/components/edit_leave_dialog.dart';
 import 'package:pm_flutter/components/simple_info_row.dart';
 import 'package:pm_flutter/constants/localization.dart';
@@ -19,6 +20,7 @@ class Asd {
 
 class _LeavesScreenState extends State<LeavesScreen> {
   LeavesBloc _leavesBloc;
+  ProfileBloc _profileBloc;
   DateTime _from, _to;
 
   @override
@@ -31,7 +33,8 @@ class _LeavesScreenState extends State<LeavesScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _leavesBloc = Provider.of(context);
+    _profileBloc = Provider.of<ProfileBloc>(context, listen: false);
+    _leavesBloc = Provider.of<LeavesBloc>(context);
     _leavesBloc.getLeaves();
   }
 
@@ -44,7 +47,7 @@ class _LeavesScreenState extends State<LeavesScreen> {
       body: RefreshIndicator(
         onRefresh: _leavesBloc.getLeaves,
         child: Container(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
           child: Column(
             children: [
               Container(
@@ -56,7 +59,7 @@ class _LeavesScreenState extends State<LeavesScreen> {
                   ),
                   onPressed: () => showDialog(
                     context: context,
-                    builder: (_) => EditLeaveDialog(),
+                    builder: (_) => EditLeaveDialog(onSubmit: createLeave),
                     barrierDismissible: false,
                   ),
                 ),
@@ -73,53 +76,7 @@ class _LeavesScreenState extends State<LeavesScreen> {
                       var leaves = snapshot.data;
                       return ListView.builder(
                         itemCount: leaves.length,
-                        itemBuilder: (context, i) => Card(
-                          margin: const EdgeInsets.only(bottom: 12),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.all(Radius.circular(4)),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  left: BorderSide(
-                                    color: leaves[i].approved
-                                        ? Colors.green.shade300
-                                        : Colors.red.shade300,
-                                    width: 5,
-                                  ),
-                                ),
-                              ),
-                              padding: const EdgeInsets.all(12),
-                              child: Column(
-                                children: [
-                                  SimpleInfoRow(
-                                    title:
-                                        AppLocalizations.of(context).translate(Strings.leaveStatus),
-                                    info: leaves[i].approved
-                                        ? AppLocalizations.of(context).translate(Strings.leaveAppr)
-                                        : AppLocalizations.of(context)
-                                            .translate(Strings.leaveNotAppr),
-                                  ),
-                                  SizedBox(height: 10),
-                                  SimpleInfoRow(
-                                    title: AppLocalizations.of(context)
-                                        .translate(Strings.leaveStartDate),
-                                    info: DateFormat.yMEd(
-                                      AppLocalizations.of(context).locale.languageCode,
-                                    ).format(leaves[i].startDate),
-                                  ),
-                                  SizedBox(height: 10),
-                                  SimpleInfoRow(
-                                    title: AppLocalizations.of(context)
-                                        .translate(Strings.leaveEndDate),
-                                    info: DateFormat.yMEd(
-                                      AppLocalizations.of(context).locale.languageCode,
-                                    ).format(leaves[i].endDate),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
+                        itemBuilder: (context, i) => renderItem(leaves, i, context),
                       );
                     } else {
                       return Container();
@@ -132,5 +89,60 @@ class _LeavesScreenState extends State<LeavesScreen> {
         ),
       ),
     );
+  }
+
+  Card renderItem(List<Leave> leaves, int i, BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 12),
+      child: ClipRRect(
+        borderRadius: BorderRadius.all(Radius.circular(4)),
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border(
+              left: BorderSide(
+                color: leaves[i].approved ? Colors.green.shade300 : Colors.red.shade300,
+                width: 5,
+              ),
+            ),
+          ),
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            children: [
+              SimpleInfoRow(
+                title: AppLocalizations.of(context).translate(Strings.leaveStatus),
+                info: leaves[i].approved
+                    ? AppLocalizations.of(context).translate(Strings.leaveAppr)
+                    : AppLocalizations.of(context).translate(Strings.leaveNotAppr),
+              ),
+              SizedBox(height: 10),
+              SimpleInfoRow(
+                title: AppLocalizations.of(context).translate(Strings.leaveStartDate),
+                info: DateFormat.yMEd(
+                  AppLocalizations.of(context).locale.languageCode,
+                ).format(leaves[i].startDate),
+              ),
+              SizedBox(height: 10),
+              SimpleInfoRow(
+                title: AppLocalizations.of(context).translate(Strings.leaveEndDate),
+                info: DateFormat.yMEd(
+                  AppLocalizations.of(context).locale.languageCode,
+                ).format(leaves[i].endDate),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void createLeave(DateTime from, DateTime to) {
+    var leave = Leave(
+      id: 0,
+      startDate: from,
+      endDate: to,
+      approved: false,
+      userId: _profileBloc.userId,
+    );
+    _leavesBloc.createLeave(leave);
   }
 }

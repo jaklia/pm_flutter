@@ -6,6 +6,10 @@ import 'package:pm_flutter/components/simple_info_row.dart';
 import 'package:pm_flutter/constants/localization.dart';
 
 class EditLeaveDialog extends StatefulWidget {
+  final Function onSubmit;
+
+  EditLeaveDialog({this.onSubmit});
+
   @override
   _EditLeaveDialogState createState() => _EditLeaveDialogState();
 }
@@ -29,7 +33,7 @@ class _EditLeaveDialogState extends State<EditLeaveDialog> {
       submitText: AppLocalizations.of(context).translate(Strings.leaveRequest),
       onCancel: () => Navigator.of(context).pop(),
       onClose: () => Navigator.of(context).pop(),
-      onSubmit: () {},
+      onSubmit: onSubmit,
       children: [
         SizedBox(height: 10),
         InkWell(
@@ -59,6 +63,11 @@ class _EditLeaveDialogState extends State<EditLeaveDialog> {
         SizedBox(height: 10),
       ],
     );
+  }
+
+  void onSubmit() {
+    widget.onSubmit(_from, _to);
+    Navigator.of(context).pop();
   }
 
   Future<void> selectFrom() async {

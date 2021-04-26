@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pm_flutter/app_localizations.dart';
 import 'package:pm_flutter/bloc/profile/profile_bloc.dart';
+import 'package:pm_flutter/constants/localization.dart';
+import 'package:pm_flutter/models/user.dart';
 import 'package:pm_flutter/screens/leaves.dart';
 import 'package:pm_flutter/screens/login_screen.dart';
 import 'package:pm_flutter/screens/tmp.dart';
@@ -28,42 +31,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Settings')),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            InkWell(
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                child: Text('Profile'),
+      appBar: AppBar(title: Text(AppLocalizations.of(context).translate(Strings.profileTab))),
+      body: StreamBuilder<User>(
+          stream: _profileBloc.profile,
+          builder: (context, snapshot) {
+            return Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  InkWell(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      child: Text('Beállítások'),
+                    ),
+                    onTap: () => {},
+                  ),
+                  Divider(),
+                  InkWell(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      child: Text(AppLocalizations.of(context).translate(Strings.leaves)),
+                    ),
+                    onTap: () => {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (ctx) => LeavesScreen()),
+                      )
+                    },
+                  ),
+                  Divider(),
+                  InkWell(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      child: Text("Kijelentkezés"),
+                    ),
+                    onTap: _onLogout,
+                  ),
+                ],
               ),
-              onTap: () => {},
-            ),
-            Divider(),
-            InkWell(
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                child: Text('Leaves'),
-              ),
-              onTap: () => {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (ctx) => LeavesScreen()),
-                )
-              },
-            ),
-            Divider(),
-            InkWell(
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                child: Text("Logout"),
-              ),
-              onTap: _onLogout,
-            ),
-          ],
-        ),
-      ),
+            );
+          }),
     );
   }
 
