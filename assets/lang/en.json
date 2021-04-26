@@ -10,5 +10,11 @@
     "leaveApproved": "Approved",
     "leaveNotApproved": "Not Approved",
     "leaveStartDate": "From",
-    "leaveEndDate": "To"
+    "leaveEndDate": "To",
+    "__TABS": "",
+    "homeTab": "Home",
+    "projectsTab": "Projects",
+    "calendarTab": "Calendar",
+    "usersTab": "Users",
+    "profileTab": "Profile"
 }

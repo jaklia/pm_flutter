@@ -10,5 +10,11 @@
     "leaveApproved": "Jóváhagyva",
     "leaveNotApproved": "Nincs jóváhagyva",
     "leaveStartDate": "Mettől",
-    "leaveEndDate": "Meddig"
+    "leaveEndDate": "Meddig",
+    "__TABS": "",
+    "homeTab": "Főoldal",
+    "projectsTab": "Projektek",
+    "calendarTab": "Naptár",
+    "usersTab": "Felhasználók",
+    "profileTab": "Profil"
 }

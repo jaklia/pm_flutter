@@ -14,10 +14,9 @@ class Strings {
   static const leaveStartDate = "leaveStartDate";
   static const leaveEndDate = "leaveEndDate";
 
-  static const home = "Home";
-  static const projects = "Projects";
-  static const leavesTab = "Leaves";
-  static const meetings = "Meetings";
-  static const users = "Users";
-  static const settings = "Settings";
+  static const homeTab = "homeTab";
+  static const projectsTab = "projectsTab";
+  static const calendarTab = "calendarTab";
+  static const usersTab = "usersTab";
+  static const profileTab = "profileTab";
 }

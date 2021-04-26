@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:pm_flutter/app_localizations.dart';
+import 'package:pm_flutter/constants/localization.dart';
 
 enum TabItem { home, projects, calendar, users, profile }
 
 Map<TabItem, String> tabName = {
-  TabItem.home: 'Home',
-  TabItem.projects: 'Projects',
-  TabItem.calendar: 'Calendar',
-  TabItem.users: 'Users',
-  TabItem.profile: 'Profile',
+  TabItem.home: Strings.homeTab,
+  TabItem.projects: Strings.projectsTab,
+  TabItem.calendar: Strings.calendarTab,
+  TabItem.users: Strings.usersTab,
+  TabItem.profile: Strings.profileTab,
 };
 
 Map<TabItem, IconData> tabIcon = {
@@ -49,7 +51,7 @@ class BottomNavigation extends StatelessWidget {
   }
 
   BottomNavigationBarItem _buildItem(BuildContext context, {TabItem tabItem}) {
-    String text = tabName[tabItem];
+    String text = AppLocalizations.of(context).translate(tabName[tabItem]);
     IconData icon = tabIcon[tabItem];
     return BottomNavigationBarItem(
       icon: Icon(
