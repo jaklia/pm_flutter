@@ -60,7 +60,8 @@ class MyApp extends StatelessWidget {
         ),
         // darkTheme: ThemeData(
         //   brightness: Brightness.dark,
-        //   accentColor: Colors.blue,
+        //   accentColor: Colors.lightBlue,
+        //   primarySwatch: Colors.lightBlue,
         // ),
         supportedLocales: [
           Locale('hu', 'HU'),

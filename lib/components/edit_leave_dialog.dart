@@ -8,7 +8,7 @@ import 'package:pm_flutter/constants/localization.dart';
 class EditLeaveDialog extends StatefulWidget {
   final Function onSubmit;
 
-  EditLeaveDialog({this.onSubmit});
+  EditLeaveDialog({@required this.onSubmit});
 
   @override
   _EditLeaveDialogState createState() => _EditLeaveDialogState();

@@ -5,7 +5,7 @@ import 'package:pm_flutter/utility/urls.dart';
 class RoomProvider {
   Future<List<Room>> getRoomList() async {
     var res = await Network.dio.get(Urls.ROOM);
-    var rooms = res.data.map((json) => Room.fromJson(json)).toList();
+    var rooms = res.data.map<Room>((json) => Room.fromJson(json)).toList();
     return rooms;
   }
 
