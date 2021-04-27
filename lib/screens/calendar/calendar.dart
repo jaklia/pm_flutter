@@ -1,6 +1,10 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:pm_flutter/app_localizations.dart';
 import 'package:pm_flutter/bloc/meeting/meeting_bloc.dart';
+import 'package:pm_flutter/constants/localization.dart';
 import 'package:pm_flutter/helper/date.dart';
 import 'package:pm_flutter/models/meeting.dart';
 import 'package:provider/provider.dart';
@@ -41,10 +45,15 @@ class _CalendarScreenState extends State<CalendarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context).translate(Strings.calendarTab)),
+      ),
       body: Column(
         children: [
           TableCalendar(
+            availableCalendarFormats: {
+              CalendarFormat.month: 'Month',
+            },
             locale: AppLocalizations.of(context).locale.languageCode,
             calendarController: _calendarController,
             startingDayOfWeek: StartingDayOfWeek.monday,
@@ -52,10 +61,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
               _date = day.onlyDate();
             }),
             events: _meetingsBloc.meetingMap ?? {},
-            holidays: {
-              DateTime(2021, 4, 22): ["e1"],
-              DateTime(2021, 4, 23): ["e1"],
-            },
           ),
           // SizedBox(height: 20),
           StreamBuilder<List<Meeting>>(
@@ -66,18 +71,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   if (a == 0) {
                     return Text("no meeting today");
                   } else {
-                    return Flexible(
-                      child: ListView.builder(
-                        //shrinkWrap: true,
-                        itemCount: _meetingsBloc.meetingMap[_date].length,
-                        itemBuilder: (context, idx) {
-                          var m = _meetingsBloc.meetingMap[_date][idx];
-                          return ListTile(
-                            title: Text(m.title ?? "(had no title)"),
-                          );
-                        },
-                      ),
-                    );
+                    return renderList();
                   }
                 } else if (snapshot.hasError) {
                   return Text("asd");
@@ -90,6 +84,91 @@ class _CalendarScreenState extends State<CalendarScreen> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () => {},
+      ),
+    );
+  }
+
+  Flexible renderList() {
+    return Flexible(
+      child: ListView.builder(
+        //shrinkWrap: true,
+        itemCount: _meetingsBloc.meetingMap[_date].length,
+        itemBuilder: (context, idx) {
+          var m = _meetingsBloc.meetingMap[_date][idx];
+          return renderMeeting(context, m);
+        },
+      ),
+    );
+  }
+
+  Card renderMeeting(BuildContext context, Meeting m) {
+    var from = DateFormat.Hm(
+      AppLocalizations.of(context).locale.languageCode,
+    ).format(m.startDate);
+    var to = DateFormat.Hm(
+      AppLocalizations.of(context).locale.languageCode,
+    ).format(m.endDate);
+
+    return Card(
+      color: Colors.white,
+      elevation: 2,
+      margin: const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 8,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Text(
+                  '$from - $to',
+                  style: Theme.of(context).textTheme.subtitle1.copyWith(
+                        fontWeight: FontWeight.w500,
+                      ),
+                ),
+                SizedBox(width: 10),
+                Text(
+                  m.title ?? "(had no title)",
+                  style: Theme.of(context).textTheme.subtitle1,
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            //Divider(),
+            Row(
+              children: [
+                SizedBox(width: 40),
+                Icon(
+                  Icons.meeting_room,
+                  color: Theme.of(context).accentColor,
+                ),
+                SizedBox(width: 4),
+                Text(
+                  m.room.name,
+                  style: Theme.of(context).textTheme.caption.copyWith(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                      ),
+                ),
+                SizedBox(width: 20),
+                Icon(
+                  Icons.group,
+                  color: Theme.of(context).accentColor,
+                ),
+                SizedBox(width: 4),
+                Text(
+                  m.userIds.length.toString(),
+                  style: Theme.of(context).textTheme.caption.copyWith(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                      ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
