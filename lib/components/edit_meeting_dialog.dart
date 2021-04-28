@@ -54,6 +54,7 @@ class _EditMeetingDialogState extends State<EditMeetingDialog> {
       children: [
         Text('Időpont'),
         InkWell(
+          onTap: selectDate,
           child: Padding(
             padding: const EdgeInsets.all(10),
             child: Text(
@@ -81,8 +82,7 @@ class _EditMeetingDialogState extends State<EditMeetingDialog> {
           Icons.access_time,
           color: Theme.of(context).accentColor,
         ),
-        Flexible(
-          fit: FlexFit.tight,
+        Expanded(
           child: InkWell(
             child: Padding(
               padding: const EdgeInsets.all(10),
@@ -96,8 +96,7 @@ class _EditMeetingDialogState extends State<EditMeetingDialog> {
           ),
         ),
         Text(' - '),
-        Flexible(
-          fit: FlexFit.tight,
+        Expanded(
           child: InkWell(
             child: Padding(
               padding: const EdgeInsets.all(10),
@@ -148,6 +147,35 @@ class _EditMeetingDialogState extends State<EditMeetingDialog> {
         ),
       ],
     );
+  }
+
+  void selectDate() async {
+    var date = await showDatePicker(
+      context: context,
+      initialDate: _from,
+      firstDate: _from,
+      lastDate: _from.add(
+        Duration(days: 365),
+      ),
+    );
+    if (date != null) {
+      setState(() {
+        _from = DateTime(
+          date.year,
+          date.month,
+          date.day,
+          _from.hour,
+          _from.minute,
+        );
+        _to = DateTime(
+          date.year,
+          date.month,
+          date.day,
+          _to.hour,
+          _to.minute,
+        );
+      });
+    }
   }
 
   void selectRoom(Room room) {

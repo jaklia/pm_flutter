@@ -52,6 +52,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
       body: Column(
         children: [
           TableCalendar(
+            calendarStyle: CalendarStyle(
+              markersMaxAmount: 3,
+            ),
             availableCalendarFormats: {
               CalendarFormat.month: 'Month',
             },

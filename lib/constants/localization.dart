@@ -6,6 +6,10 @@ class Strings {
 
   static const cancel = "cancel";
 
+  static const meetings = "meetings";
+  static const newMeeting = "newMeeting";
+  static const editMeeting = "editMeeting";
+
   static const leaves = "leaves";
   static const leaveRequest = "leaveRequest";
   static const leaveStatus = "leaveStatus";
