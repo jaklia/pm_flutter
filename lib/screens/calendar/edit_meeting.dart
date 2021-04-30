@@ -4,22 +4,18 @@ import 'package:pm_flutter/app_localizations.dart';
 import 'package:pm_flutter/bloc/profile/profile_bloc.dart';
 import 'package:pm_flutter/bloc/room/room_bloc.dart';
 import 'package:pm_flutter/bloc/users/users_bloc.dart';
-import 'package:pm_flutter/components/form_dialog.dart';
+import 'package:pm_flutter/components/add_users_dialog.dart';
 import 'package:pm_flutter/constants/localization.dart';
 import 'package:pm_flutter/models/room.dart';
 import 'package:pm_flutter/models/user.dart';
 import 'package:provider/provider.dart';
 
-class EditMeetingDialog extends StatefulWidget {
-  final Function onSubmit;
-
-  EditMeetingDialog({@required this.onSubmit});
-
+class EditMeetingScreen extends StatefulWidget {
   @override
-  _EditMeetingDialogState createState() => _EditMeetingDialogState();
+  _EditMeetingScreenState createState() => _EditMeetingScreenState();
 }
 
-class _EditMeetingDialogState extends State<EditMeetingDialog> {
+class _EditMeetingScreenState extends State<EditMeetingScreen> {
   DateTime _from;
   DateTime _to;
   Room _room;
@@ -45,34 +41,62 @@ class _EditMeetingDialogState extends State<EditMeetingDialog> {
     _roomBloc = Provider.of<RoomBloc>(context);
     _profileBloc = Provider.of<ProfileBloc>(context);
     _roomBloc.getRooms();
+    if (_users.length == 0) {
+      _users.add(_profileBloc.profile.value);
+      _usersBloc.setFilter([_profileBloc.profile.value]);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return FormDialog(
-      title: 'Új megbeszélés',
-      children: [
-        Text('Időpont'),
-        InkWell(
-          onTap: selectDate,
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Text(
-              DateFormat.yMEd(
-                AppLocalizations.of(context).locale.languageCode,
-              ).format(_from),
-            ),
+    return Scaffold(
+        appBar: AppBar(
+          title: Text(
+            AppLocalizations.of(context).translate(Strings.newMeeting),
           ),
         ),
-        renderTimes(context),
-        renderRoom(context),
-      ],
-      cancelText: AppLocalizations.of(context).translate(Strings.cancel),
-      submitText: 'Mentés',
-      onSubmit: onSubmit,
-      onCancel: onCancel,
-      onClose: onClose,
-    );
+        body: ListView(
+          padding: const EdgeInsets.all(16),
+          //crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Időpont'),
+            Divider(),
+            InkWell(
+              onTap: selectDate,
+              child: Text(
+                DateFormat.yMEd(
+                  AppLocalizations.of(context).locale.languageCode,
+                ).format(_from),
+              ),
+            ),
+            renderTimes(context),
+            SizedBox(height: 16),
+            Text('Terem'),
+            Divider(),
+            renderRoom(context),
+            SizedBox(height: 16),
+            Text('Résztvevők'),
+            Divider(),
+            ElevatedButton(
+              child: Text('Hozzáadás'),
+              onPressed: () => showDialog(
+                context: context,
+                builder: (_) => AddUsersDialog(
+                  users: _usersBloc.filteredUsers,
+                  onSubmit: addUsers,
+                ),
+              ),
+            ),
+            SizedBox(height: 10),
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: _users.length,
+              itemBuilder: (context, i) {
+                return Text(_users[i].name);
+              },
+            ),
+          ],
+        ));
   }
 
   Row renderTimes(BuildContext context) {
@@ -185,8 +209,15 @@ class _EditMeetingDialogState extends State<EditMeetingDialog> {
     });
   }
 
+  void addUsers(List<User> users) {
+    _usersBloc.setFilter(_users);
+    setState(() {
+      _users.addAll(users);
+    });
+  }
+
   void onSubmit() {
-    widget.onSubmit();
+    // widget.onSubmit();
     closeDialog();
   }
 

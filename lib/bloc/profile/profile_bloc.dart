@@ -1,5 +1,6 @@
 import 'package:pm_flutter/bloc/profile/profile_repository.dart';
 import 'package:pm_flutter/models/user.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
 
 class ProfileBloc {
@@ -8,7 +9,7 @@ class ProfileBloc {
 
   final _id = BehaviorSubject<int>();
 
-  get profile {
+  ValueObservable<User> get profile {
     return _profile.stream;
   }
 

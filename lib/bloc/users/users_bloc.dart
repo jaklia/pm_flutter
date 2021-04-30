@@ -10,6 +10,8 @@ class UsersBloc {
   final _userWorktimes = BehaviorSubject<List<TimeEntry>>.seeded([]);
   final _currentUser = BehaviorSubject<User>();
 
+  List<User> _filter = [];
+
   void dispose() {
     _users.close();
     _worktimes.close();
@@ -43,5 +45,17 @@ class UsersBloc {
 
   get userWorktimes {
     return _userWorktimes.stream;
+  }
+
+  List<User> get filteredUsers {
+    var newList = _users.value;
+    for (var u in _filter) {
+      newList.removeWhere((item) => item.id == u.id);
+    }
+    return newList;
+  }
+
+  void setFilter(List<User> filter) {
+    _filter = filter;
   }
 }

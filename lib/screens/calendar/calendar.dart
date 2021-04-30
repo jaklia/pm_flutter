@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pm_flutter/app_localizations.dart';
 import 'package:pm_flutter/bloc/meeting/meeting_bloc.dart';
-import 'package:pm_flutter/components/edit_meeting_dialog.dart';
 import 'package:pm_flutter/constants/localization.dart';
 import 'package:pm_flutter/helper/date.dart';
 import 'package:pm_flutter/models/meeting.dart';
+import 'package:pm_flutter/screens/calendar/edit_meeting.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -87,10 +87,15 @@ class _CalendarScreenState extends State<CalendarScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => showDialog(
-          context: context,
-          builder: (_) => EditMeetingDialog(),
+        onPressed: () => Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => EditMeetingScreen(),
+          ),
         ),
+        // () => showDialog(
+        //   context: context,
+        //   builder: (_) => EditMeetingDialog(),
+        // ),
       ),
     );
   }
