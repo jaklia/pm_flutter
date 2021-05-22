@@ -52,6 +52,7 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'pm_flutter',
         theme: ThemeData(
           brightness: Brightness.light,

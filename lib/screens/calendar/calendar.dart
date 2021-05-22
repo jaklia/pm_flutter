@@ -73,12 +73,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 if (snapshot.hasData) {
                   var a = _meetingsBloc.meetingMap[_date]?.length ?? 0;
                   if (a == 0) {
-                    return Text("no meeting today");
+                    return Text(AppLocalizations.of(context).translate(Strings.noMeetingToday));
                   } else {
                     return renderList();
                   }
                 } else if (snapshot.hasError) {
-                  return Text("asd");
+                  return Text("Something went wrong");
                 } else {
                   return Container();
                 }

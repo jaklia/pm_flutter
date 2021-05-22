@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pm_flutter/app_localizations.dart';
 import 'package:pm_flutter/bloc/projects/projects_bloc.dart';
+import 'package:pm_flutter/constants/localization.dart';
 import 'package:pm_flutter/models/project.dart';
 import 'package:pm_flutter/screens/projects/project_details.dart';
 import 'package:provider/provider.dart';
@@ -26,27 +28,25 @@ class _ProjectListScreenState extends State<ProjectListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Projects"),
+        title: Text(AppLocalizations.of(context).translate(Strings.projects)),
       ),
       body: StreamBuilder<List<Project>>(
         stream: _projectsBloc.projects,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Container(
-              child:
-                  Text("Something went wrong!\n${snapshot.error.toString()}"),
+              child: Text("Something went wrong!\n${snapshot.error.toString()}"),
             );
           } else if (snapshot.hasData) {
             return ListView.builder(
-                padding: const EdgeInsets.symmetric(vertical: 16),
+                padding: const EdgeInsets.all(16),
                 itemCount: snapshot.data.length,
                 itemBuilder: (context, i) => Card(
-                    margin: EdgeInsets.all(6),
-                    elevation: 5,
+                    margin: const EdgeInsets.symmetric(vertical: 6),
+                    elevation: 4,
                     child: Container(
                       child: ListTile(
-                        onTap: () =>
-                            _openProjectDetails(context, snapshot.data[i]),
+                        onTap: () => _openProjectDetails(context, snapshot.data[i]),
                         title: Text(
                           snapshot.data[i].name,
                           maxLines: 1,
@@ -90,8 +90,8 @@ class _ProjectListScreenState extends State<ProjectListScreen> {
   }
 
   void _openProjectDetails(BuildContext context, Project project) {
-    Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => ProjectDetailsScreen(project)));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => ProjectDetailsScreen(project)));
   }
 }
 

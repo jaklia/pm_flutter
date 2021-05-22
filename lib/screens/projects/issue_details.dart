@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pm_flutter/app_localizations.dart';
 import 'package:pm_flutter/components/simple_info_row.dart';
+import 'package:pm_flutter/constants/localization.dart';
 import 'package:pm_flutter/models/issue.dart';
 import 'package:pm_flutter/models/project.dart';
 import 'package:pm_flutter/screens/projects/log_worktime.dart';
@@ -15,7 +16,11 @@ class IssueDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Issue details")),
+      appBar: AppBar(
+        title: Text(
+          AppLocalizations.of(context).translate(Strings.issueDetails),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -35,24 +40,31 @@ class IssueDetailsScreen extends StatelessWidget {
             Text(_issue.description ?? "", style: Theme.of(context).textTheme.bodyText2),
             SizedBox(height: 20),
             SimpleInfoRow(
-              title: "Start date",
-              info: DateFormat.yMd(
+              title: AppLocalizations.of(context).translate(Strings.issueStartDate),
+              info: DateFormat.yMEd(
                 AppLocalizations.of(context).locale.languageCode,
               ).format(_issue.startDate),
             ),
             SizedBox(height: 20),
             SimpleInfoRow(
-              title: "Due date",
-              info: DateFormat.yMd(
+              title: AppLocalizations.of(context).translate(Strings.issueDueDate),
+              info: DateFormat.yMEd(
                 AppLocalizations.of(context).locale.languageCode,
               ).format(_issue.dueDate),
+            ),
+            SizedBox(height: 20),
+            SimpleInfoRow(
+              title: "Becsült idő",
+              info: _issue.estimatedHours.toString(),
             ),
             SizedBox(height: 20),
             // TODO:  maybe: show logs for this issue
             Container(
               width: double.infinity,
               child: ElevatedButton(
-                child: Text("Log Worktime"),
+                child: Text(
+                  AppLocalizations.of(context).translate(Strings.logWorktime),
+                ),
                 onPressed: () => _openLogPage(context, _issue),
               ),
             )

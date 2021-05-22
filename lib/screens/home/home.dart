@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:pm_flutter/app_localizations.dart';
 import 'package:pm_flutter/bloc/profile/profile_bloc.dart';
 import 'package:pm_flutter/bloc/timeentries/timeentries_bloc.dart';
 import 'package:pm_flutter/models/user.dart';
@@ -49,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          _header(),
+          // _header(),
           Expanded(
             child: StreamBuilder<List<TimeEntry>>(
               stream: _worktimesBloc.timeEntries,
@@ -64,9 +65,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemCount: snapshot.data.length,
                     itemBuilder: (context, i) => ListTile(
                       onTap: () => _editWorktime(context, snapshot.data[i]),
-                      title: Text(
-                        "${DateFormat("y.MM.d").format(snapshot.data[i].date)}  ${snapshot.data[i].issueName}",
-                      ),
+                      title: Text("${DateFormat.yMEd(
+                        AppLocalizations.of(context).locale.languageCode,
+                      ).format(snapshot.data[i].date)}    ${snapshot.data[i].issueName}"
+
+                          // "${DateFormat("y.MM.d").format(snapshot.data[i].date)}  ${snapshot.data[i].issueName}",
+                          ),
                       subtitle: Text(
                         "${snapshot.data[i].minutes / 60.0} hours ${snapshot.data[i].description}",
                       ),

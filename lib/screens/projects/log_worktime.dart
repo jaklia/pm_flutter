@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:pm_flutter/app_localizations.dart';
 import 'package:pm_flutter/bloc/profile/profile_bloc.dart';
 import 'package:pm_flutter/bloc/timeentries/timeentries_bloc.dart';
+import 'package:pm_flutter/constants/localization.dart';
 import 'package:pm_flutter/models/issue.dart';
 import 'package:pm_flutter/models/timeentry.dart';
 import 'package:provider/provider.dart';
@@ -55,7 +57,7 @@ class _LogWorkTimeScreenState extends State<LogWorkTimeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Log"),
+        title: Text(AppLocalizations.of(context).translate(Strings.logWorktime)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -73,7 +75,7 @@ class _LogWorkTimeScreenState extends State<LogWorkTimeScreen> {
             Container(
               width: double.infinity,
               child: ElevatedButton(
-                child: Text("Save"),
+                child: Text(AppLocalizations.of(context).translate(Strings.save)),
                 onPressed: () => _save(context),
               ),
             )
@@ -112,11 +114,13 @@ class _LogWorkTimeScreenState extends State<LogWorkTimeScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Text(
-              'Date',
+              AppLocalizations.of(context).translate(Strings.date),
               style: Theme.of(context).textTheme.bodyText2.copyWith(color: Colors.grey),
             ),
             Text(
-              DateFormat.MMMMEEEEd().format(_date),
+              DateFormat.yMEd(
+                AppLocalizations.of(context).locale.languageCode,
+              ).format(_date),
               style: Theme.of(context).textTheme.bodyText2,
             ),
           ],
@@ -130,14 +134,17 @@ class _LogWorkTimeScreenState extends State<LogWorkTimeScreen> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Text(
-          'Worktime',
+          AppLocalizations.of(context).translate(Strings.worktime),
           style: Theme.of(context).textTheme.bodyText2.copyWith(color: Colors.grey),
         ),
         SizedBox(width: 120),
         Container(
-          width: 50,
+          width: 100,
           child: TextFormField(
-            decoration: InputDecoration(hintText: "60"),
+            decoration: InputDecoration(
+              hintText: "60",
+              suffix: Text(" perc"),
+            ),
             keyboardType: TextInputType.number,
             textAlign: TextAlign.end,
             initialValue: (_minutes == null ? "" : _minutes.toString()),
@@ -157,7 +164,7 @@ class _LogWorkTimeScreenState extends State<LogWorkTimeScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Description',
+          AppLocalizations.of(context).translate(Strings.description),
           style: Theme.of(context).textTheme.bodyText2.copyWith(color: Colors.grey),
         ),
         TextFormField(

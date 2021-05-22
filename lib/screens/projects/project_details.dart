@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pm_flutter/app_localizations.dart';
 import 'package:pm_flutter/bloc/projects/projects_bloc.dart';
+import 'package:pm_flutter/constants/localization.dart';
 import 'package:pm_flutter/models/issue.dart';
 import 'package:pm_flutter/models/project.dart';
 import 'package:pm_flutter/screens/projects/issue_details.dart';
@@ -30,7 +32,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Project Details"),
+        title: Text(AppLocalizations.of(context).translate(Strings.projectDetails)),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
